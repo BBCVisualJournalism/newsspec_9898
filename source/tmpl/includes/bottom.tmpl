@@ -28,7 +28,12 @@ if (scaffoldLite) {
                     done = true;
                     require.config(settings.requireConfig);
                     require([settings.moduleToStartApp], function () {
-                        require(['app'], function (app) {});
+                        require(['app'], function (app) {
+                            app.init({
+                                pathdomain: "<%= pathDomain %>",
+                                pathpal: "<%= pathPal %>"  
+                            })
+                        });
                     });
                 }
             }

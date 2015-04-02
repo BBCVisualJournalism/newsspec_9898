@@ -42,7 +42,9 @@ module.exports = function (grunt) {
             projectNumber:       '<%= config.project_number %>',
             debug:               '<%= config.debug %>',
             amdModulePaths:      '<%= JSON.stringify(amdModulePaths) %>',
-            scaffoldLite:        scaffoldLite
+            scaffoldLite:        scaffoldLite,
+            pathDomain:          '<%= env[config.whichEnv].domain %>',
+            pathPal:             '<%= env[config.whichEnv].pal %>'
         };
 
         grunt.config('multi_lang_site_generator', {
