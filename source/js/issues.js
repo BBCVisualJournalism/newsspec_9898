@@ -5,18 +5,29 @@ define([
 	function IssuesView() {
 		this.elm = $('.page__issues');
 		this.issues = this.elm.find('.issues .issue');
-		console.log(this.issues);
+		this.submitButton = $('.nav-buttons #choose-policy');
 
 		/* LISTENERS */
 		this.issues.on('click', $.proxy(this.issueClicked, this));
+		this.submitButton.on('click', $.proxy(this.submit, this));
 	}
 
 	IssuesView.prototype = {
+
 		issueClicked: function (event) {
 			var issueElm = $(event.currentTarget);
 			issueElm.toggleClass('issue__checked');
+		},
+
+		submit: function () {
+			var selectedOptions = [];
+			this.issues.filter('.issue__checked').each(function () {
+				selectedOptions.push($(this).data('issue'));
+			});
+			console.log(selectedOptions);
 		}
-	}
+
+	};
 
 	return IssuesView;
 });
