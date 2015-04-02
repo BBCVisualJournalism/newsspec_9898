@@ -3,7 +3,6 @@ define([
 ], function (news) {
 
 	function IssuesView() {
-		console.log('Hello 1');
 		this.elm = $('.page__issues');
 		this.issues = this.elm.find('.issues .issue');
 		console.log(this.issues);
@@ -14,7 +13,6 @@ define([
 
 	IssuesView.prototype = {
 		issueClicked: function (event) {
-			console.log('Hello');
 			var issueElm = $(event.currentTarget);
 			issueElm.toggleClass('issue__checked');
 		}
