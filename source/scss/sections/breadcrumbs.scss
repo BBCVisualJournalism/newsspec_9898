@@ -1,6 +1,8 @@
 .breadcrumbs{
 	list-style: none;
 	overflow: hidden;
+	margin: 0 0 20px;
+	padding: 0;
 
 	.breadcrumb{
 		display: block;
@@ -25,7 +27,6 @@
 		}
 
 		.breadcrumb--icon{
-			display: inline-block;
 			opacity: 0.45;
     		filter: alpha(opacity=45);
 		}
@@ -57,7 +58,7 @@
 	.breadcrumb__teal{
 		border-color: #87c2c2;
 		color: #87c2c2;
-		
+
 		.breadcrumb--icon{
 			opacity: initial;
 			filter: initial;

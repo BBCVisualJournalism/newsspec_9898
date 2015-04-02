@@ -1,3 +1,9 @@
-define(['lib/news_special/bootstrap', 'lib/news_special/share_tools/controller'], function (news, ShareTools) {
+define([
+    'lib/news_special/bootstrap',
+    'issues'
+], function (news, IssuesView) {
+
+    new IssuesView();
+
     news.sendMessageToremoveLoadingImage();
 });

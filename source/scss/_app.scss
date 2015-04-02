@@ -1,4 +1,16 @@
 /* separate your sass into different files to keep it maintainable!  */
-.main img {
-    width: 100%;
+body{
+	color: #3E3E3E;
+}
+h2{
+	font: bold 20px Helvetica;
+	line-height: 28px;
+	margin: 0;
+}
+
+p{
+	margin: 0;
+	font: 16px Helvetica;
+	line-height: 19px;
+	max-width: 460px;
 }
