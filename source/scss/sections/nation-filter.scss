@@ -1,0 +1,99 @@
+.issue-guide__no-js{
+  .nation-filter{
+    display: none;
+  }
+}
+
+.nation-filter {
+    width: auto;
+    margin: 0;
+}
+
+@media (min-width: 701px) {
+  .nation-filter {
+    width: 86%;
+    margin: 0 7% 0;;
+  }
+}
+
+
+.nation-filter {
+    background-color: #fff;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: auto;
+    list-style: none;
+    margin: 0 1rem 0;;
+
+
+    .nation-filter__title,
+    .nation-filter__countries--list {
+      display: inline-block;
+    }
+
+    .nation-filter__title {
+      line-height: 1.8;
+      margin-bottom: .875rem;
+    }
+    .nation-filter__title {
+      padding: 0 1rem;
+      margin-bottom: .75rem;
+      margin-top: 1rem;
+      font-size: 1.125em;
+    }
+
+    .nation-filter__countries--list {
+      font-size: 0;
+      list-style: none;
+      padding: 0 1rem;
+      margin-bottom: .75rem;
+      margin-top: 1.125rem;
+
+      .nation-filter__countries--item {
+        border-bottom: 0.25rem solid #fff;
+        color: #404040;
+        display: inline-block;
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 0 0 .25rem;
+        -webkit-transition: border .2s linear;
+        -moz-transition: border .2s linear;
+        -ms-transition: border .2s linear;
+        -o-transition: border .2s linear;
+        transition: border .2s linear;
+      }
+
+      .nation-filter__countries--item + .nation-filter__countries--item {
+        margin-left: 1em;
+      }
+
+
+      .nation-filter__countries--item:hover, 
+      .nation-filter__countries--item:active {
+        border-bottom-color: #ccc;
+        cursor: pointer;
+      }
+
+      
+      .nation-filter__countries--item.nation-filter__countries--item--active:hover, 
+      .nation-filter__countries--item.nation-filter__countries--item--active:active,
+      .nation-filter__countries--item.nation-filter__countries--item--active {
+        border-bottom-color: #c00;
+      }
+
+
+      .nation-filter__countries--item.nation-filter__countries--item--notrequired,
+      .nation-filter__countries--item.nation-filter__countries--item--notrequired:active,
+      .nation-filter__countries--item.nation-filter__countries--item--notrequired:hover {
+        color: #ededed;
+        cursor: default;
+        border-bottom-color: #fff;
+      }
+
+
+    }
+}
+
+
+
