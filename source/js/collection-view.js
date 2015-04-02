@@ -78,10 +78,7 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
             news.pubsub.on('collection:view:apply:filter', function (data) {
                 CollectionView.applyFilters(data);
             });
-            news.pubsub.on('tab:selector:change:' + this.elem, function () {
-                news.$('.collection-view-container').removeClass('issue-guide__tab__active');
-                CollectionView.collectionPane.addClass('issue-guide__tab__active');
-            });
+            console.log(news.$(window));
             news.$(window).resize(function () {
                 CollectionView.determineViewSize();
             });
@@ -136,13 +133,6 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
             news.$('.issue-guide__no-content__' + this.elem).addClass('issue-guide__no-content__' + this.elem + '--active');
             this.removeRefreshMask();
         },
-
-        // openCards: function () {
-        //     for (var i = this.openStates.length - 1; i >= 0; i--) {
-        //         news.$('article[data-' + this.elem + '="' + this.openStates[i] + '"]').addClass('guide-card--expanded');
-        //     }
-        //     this.openStates = [];
-        // },
 
         //TODO these three functions have a lot of repitition - functional programming??
         showOverviewCards: function (cards) {
@@ -311,7 +301,7 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
         },
 
         changeCta: function () {
-            this.collectionPane.find('.js-filter--view .guide-card__cta').html(this.collectionCta[this.elem] + this.cta);
+           // this.collectionPane.find('.js-filter--view .guide-card__cta').html(this.collectionCta[this.elem] + this.cta);
         },
         changeOverviewCta: function () {
             news.$('.js-slot-' + this.elem + '-all .guide-card__cta').html(this.overViewCta[this.elem] + this.cta);

@@ -85,6 +85,60 @@ define(['lib/news_special/bootstrap', 'nation-filter', 'collection-view', 'card-
     },
     nations = ['eng', 'ni', 'scot', 'cym'];
 
+
+    function listenForComponentStateChanges() {
+        // news.pubsub.on('dropdown:selector:change:issue', function (data) {
+        //     currentState['issue'] = data;
+        //     news.$('.issue-guide__cards').addClass('.issue-guide__tab__active--issue');
+        //     news.$('.nation-filter').removeClass(function (index, css) {
+        //         return (css.match(/\bissue-guide__filter-issue-\S+/g) || []).join(' ');
+        //     });
+        //     news.$('.nation-filter').addClass('issue-guide__filter-issue-' + data);
+        //     news.pubsub.emit('nation:filter:selectable', [regionalOrNationalPartyInWestminster['all']]);
+        //     requestNewCollectionViewBasedOnState('issue');
+        //     devolvedState();
+        // });
+        // news.pubsub.on('nation:filter:change', function (data) {
+        //     currentState['nation'] = data;
+        //     news.pubsub.emit('collection:view:apply:filter', [data]);
+        //     news.$('.idt-share__overlay').css('display', 'none');
+        //     news.pubsub.emit('istats', ['click', data + '-select', currentState[currentState['tab']]]);
+        //     devolvedState();
+        // });
+        // news.pubsub.on('collection:view:switch:state:issue', function (data) {
+        //     currentState['collection-issue'] = data;
+        //     toggleViews(data, 'issue');
+        //     news.$('.issue-guide__main').removeClass(function (index, css) {
+        //         return (css.match(/\bissue-guide__issue-\S+/g) || []).join(' ');
+        //     });
+        //     news.$('.issue-guide__main').addClass('issue-guide__issue-' + data);
+        //     devolvedState();
+        // });
+        // news.pubsub.on('collection:view:switch:state:party', function (data) {
+        //     currentState['collection-party'] = data;
+        //     toggleViews(data, 'party');
+        //     news.$('.issue-guide__main').removeClass(function (index, css) {
+        //         return (css.match(/\bissue-guide__party-\S+/g) || []).join(' ');
+        //     });
+        //     news.$('.issue-guide__main').addClass('issue-guide__party-' + data);
+        //     devolvedState();
+        // });
+        news.pubsub.on('collection:view:resize', function (data) {
+            requestNewCollectionViewBasedOnState(data);
+            devolvedState();
+        });
+
+    }
+
+    function requestNewCollectionViewBasedOnState() {
+        news.pubsub.emit('collection:view:update:issue', [{
+            'type': 'issues',
+            'selection': 'health',
+            'filter': 'uk'
+        }]);
+    }
+
+
     function addNationFilterToApplication() {
    		new NationFilter({
    			'state': 'uk'
@@ -109,6 +163,7 @@ define(['lib/news_special/bootstrap', 'nation-filter', 'collection-view', 'card-
     	console.log(options);
 		addNationFilterToApplication();
 		addCollectionViewToApplication(options);
+        requestNewCollectionViewBasedOnState();
 	    news.sendMessageToremoveLoadingImage();
     }
 
