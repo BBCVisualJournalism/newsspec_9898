@@ -44,10 +44,9 @@
 				background-color: #004C4C;
 			}
 		}
-		.issue.issue__checked{
+		.issue__checked{
 			border: 2px solid #004C4C;
 			padding-top: 11px;
-
 			&:before{
 				margin: -13px 12px 0 -2px;
 				background-color: #004C4C;
@@ -56,6 +55,7 @@
 			}
 		}		
 	}
+
 	@include respondMinMax(580px, false){
 		.issues .issue{
 			margin: 2px 1%;

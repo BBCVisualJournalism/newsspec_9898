@@ -20,11 +20,10 @@ define([
 		},
 
 		submit: function () {
-			var selectedOptions = [];
+			var selectedOptions = ['test'];
 			this.issues.filter('.issue__checked').each(function () {
 				selectedOptions.push($(this).data('issue'));
 			});
-			console.log(selectedOptions);
 		}
 
 	};

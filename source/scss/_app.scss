@@ -1,4 +1,5 @@
 /* separate your sass into different files to keep it maintainable!  */
+
 body{
 	color: #3E3E3E;
 }
@@ -13,4 +14,8 @@ p{
 	font: 16px Helvetica;
 	line-height: 19px;
 	max-width: 460px;
+}
+
+.main{
+	display: none;
 }
