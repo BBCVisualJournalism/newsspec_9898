@@ -1,0 +1,102 @@
+$backgroundColor: #ededed;
+
+@mixin hideContent() {
+    display: block;
+    -webkit-transition: opacity 0.5s cubic-bezier(0.38, 0.68, 0.3, 1);
+    -o-transition: opacity 0.5s cubic-bezier(0.38, 0.68, 0.3, 1);
+    transition: opacity 0.5s cubic-bezier(0.38, 0.68, 0.3, 1);
+    opacity: 0; 
+    height: 0;
+    padding: 0;
+    max-height: 0;
+}
+
+@mixin showContent() {
+    opacity: 1;
+    height: auto;
+    max-height: 100%;
+}
+
+.issue-guide__collection {
+    min-height: 500px;
+    background: $backgroundColor;
+}
+
+.issue-guide__cards--collection--two-column {
+    .issue-guide__cards--column {
+        width: 50%;
+        padding: 0;
+        margin-left: 0;
+        margin: 0 0;
+        float: left;
+    }
+
+    .issue-guide__cards--column-pri {
+        padding-right: 0.5em;
+    }
+
+    .issue-guide__cards--column-sec {
+        padding-left: 0.5em;
+    }
+}
+
+.js-slot {
+    @include hideContent();
+    overflow: hidden;
+}
+
+
+.issue-guide__filter-uk {
+    .js-slot-party-uk,
+    .js-slot-issue-uk {
+        .js-slot {
+            @include showContent();
+        }
+    }
+}
+
+.issue-guide__filter-eng {
+    
+    .js-slot-party-eng,  
+    .js-slot-issue-eng {
+        .js-slot {
+           @include showContent();
+        }
+    }
+}
+
+.issue-guide__filter-ni {
+    .js-slot-party-ni,
+    .js-slot-issue-ni {
+        .js-slot {
+            @include showContent();
+        }
+    }
+}
+
+.issue-guide__filter-scot {
+    .js-slot-party-scot,
+    .js-slot-issue-scot {
+        .js-slot {
+            @include showContent();
+        }
+    }
+}
+
+.issue-guide__filter-cym {
+    .js-slot-party-cym,
+    .js-slot-issue-cym {
+        .js-slot {
+            @include showContent();
+        }
+    }
+}
+
+.clearfix::after {
+    content: " ";
+    clear: both;
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+}

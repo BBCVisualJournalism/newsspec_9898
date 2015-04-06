@@ -37,6 +37,7 @@ define(['lib/news_special/bootstrap'], function (news) {
             this.filterItems.removeClass('nation-filter__countries--item--active');
             selected.addClass('nation-filter__countries--item--active');
             this.state = item;
+            console.log('emit filter');
             news.pubsub.emit('nation:filter:change', [this.state]);
             
         },

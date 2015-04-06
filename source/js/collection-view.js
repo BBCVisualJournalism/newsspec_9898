@@ -254,6 +254,7 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
         },
 
         applyFilters: function (filter) {
+            console.log('applyFilters');
             news.$('.collection-view-container').removeClass(function (index, css) {
                 return (css.match(/\bissue-guide__filter-\S+/g) || []).join(' ');
             });
