@@ -9,29 +9,14 @@ define([
 
 		/* LISTENERS */
 		this.issues.on('click', this.issueClicked);
-		this.issues.on('mouseenter', this.issueHoverStart);
-		this.issues.on('mouseleave', this.issueHoverEnd);
 		this.submitButton.on('click', $.proxy(this.submit, this));
 	}
 
 	IssuesView.prototype = {
 
 		issueClicked: function (event) {
-			var issueElm = $(event.currentTarget);
+			var issueElm = $(event.currentTarget || event.srcElement);
 			issueElm.toggleClass('issue__checked');
-			setTimeout(function () {
-				issueElm.removeClass('issue__hover');
-			}, 20);
-		},
-
-		issueHoverStart: function () {
-			var issueElm = $(event.currentTarget);
-			issueElm.addClass('issue__hover');
-		},
-
-		issueHoverEnd: function () {
-			var issueElm = $(event.currentTarget);
-			issueElm.removeClass('issue__hover');
 		},
 
 		submit: function () {
