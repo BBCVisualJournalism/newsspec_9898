@@ -25,6 +25,7 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
         this.vocabs = opts.vocabs;
         this.collectionPane = news.$('#js-' + this.elem + '-collection-view-container');
         this.collectionTemplate = news.$('#js-' + this.elem + '-' + this.viewState + '-collection-view-tmpl');
+        console.log(this.collectionPane, this.collectionTemplate);
         this.render(this.collectionPane, this.collectionTemplate.html());
         this.viewport = news.$('.issue-guide__cards--collection--' + this.elem);
         this.cta = '<span class="guide-card__cta--pointer"></span>';
@@ -253,6 +254,7 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
         },
 
         applyFilters: function (filter) {
+            console.log('applyFilters');
             news.$('.collection-view-container').removeClass(function (index, css) {
                 return (css.match(/\bissue-guide__filter-\S+/g) || []).join(' ');
             });
@@ -270,6 +272,7 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
         },
 
         makeApiCall: function (request) {
+            this.changeState(request);
             news.pubsub.emit('model:card:request', [{
                 'requestor': 'collection:view:' + this.elem,
                 'endpoint': this.buildEndPoint(request),
