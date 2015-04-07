@@ -95,19 +95,21 @@ define([
 
     function listenForComponentStateChanges() {
         news.pubsub.on('nation:filter:change', function (data) {
-            console.log('nation-filter');
             news.pubsub.emit('collection:view:apply:filter', [data]);
         });
         news.pubsub.on('collection:view:resize', function (data) {
             requestNewCollectionViewBasedOnState(data);
         });
+        news.pubsub.on('collection:view:show-policy', function (data) {
+            requestNewCollectionViewBasedOnState(data);
+        });
 
     }
 
-    function requestNewCollectionViewBasedOnState() {
+    function requestNewCollectionViewBasedOnState(policy) {
         news.pubsub.emit('collection:view:update:issue', [{
             'type': 'issues',
-            'selection': 'health',
+            'selection': policy,
             'filter': 'uk'
         }]);
     }
@@ -134,16 +136,18 @@ define([
     }
 
     function init(options) {
-        console.log(options);
+
         addNationFilterToApplication();
         addCollectionViewToApplication(options);
-        requestNewCollectionViewBasedOnState();
         listenForComponentStateChanges();
 
         new IssuesView();
 
         news.sendMessageToremoveLoadingImage();
         $('.main').show();
+
+        // TODO just to test pubsub Remove
+        news.pubsub.emit('collection:view:show-policy', ['health']);
     }
 
     return {
