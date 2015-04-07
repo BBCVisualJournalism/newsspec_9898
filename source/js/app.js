@@ -103,7 +103,9 @@ define([
         news.pubsub.on('collection:view:show-policy', function (data) {
             requestNewCollectionViewBasedOnState(data);
         });
-
+        news.pubsub.on('popup:confirm:issue', function (data) {
+            console.log('Oh my word you have just added the ' + data + ' card, who would have funk it');
+        });
     }
 
     function requestNewCollectionViewBasedOnState(policy) {

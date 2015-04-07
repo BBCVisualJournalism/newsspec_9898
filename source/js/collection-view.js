@@ -25,10 +25,8 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
         this.vocabs = opts.vocabs;
         this.collectionPane = news.$('#js-' + this.elem + '-collection-view-container');
         this.collectionTemplate = news.$('#js-' + this.elem + '-' + this.viewState + '-collection-view-tmpl');
-        console.log(this.collectionPane, this.collectionTemplate);
         this.render(this.collectionPane, this.collectionTemplate.html());
         this.viewport = news.$('.issue-guide__cards--collection--' + this.elem);
-        this.cta = '<span class="guide-card__cta--pointer"></span>';
         this.subscribe();
     };
 
@@ -98,22 +96,10 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
                 moveTo;
             identifier = news.$(event.currentTarget).find('article').attr('id').split('card-')[1];
 
-            if (news.$.inArray(identifier, CollectionView.slotSelect[CollectionView.filterBy[CollectionView.elem]]) > -1) {
-                news.pubsub.emit('dropdown:selector:change:' + CollectionView.elem, [identifier]);
-            } else if (news.$(event.target).hasClass('guide-card__cta')) {
-                moveTo = identifier.split('-');
-                if (CollectionView.elem === 'party') {
-                    news.pubsub.emit('tab:selector:request:change', ['issue']);
-                    news.pubsub.emit('dropdown:selector:change:issue', [moveTo[1]]);
-                    news.pubsub.emit('istats', ['more-policies-click', moveTo[1] + '-select']);
-                } else {
-                    news.pubsub.emit('tab:selector:request:change', ['party']);
-                    news.pubsub.emit('dropdown:selector:change:party', [moveTo[0]]);
-                    news.pubsub.emit('istats', ['more-parties-click', moveTo[0] + '-select']);
-                }
+            if (news.$(event.target).hasClass('guide-card__cta')) {
+                news.pubsub.emit('popup:confirm:issue', [identifier]);
             }
 
-            CollectionView.openCloseCards(news.$(event.currentTarget).find('article'), event.target);
         },
 
         openCloseCards: function (card, element) {
@@ -158,7 +144,6 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
                 this.displayPartyCards(cards);
             }
             this.changeCta();
-            //this.openCards();
             this.removeRefreshMask();
         },
 
@@ -302,11 +287,8 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
         },
 
         changeCta: function () {
-           // this.collectionPane.find('.js-filter--view .guide-card__cta').html(this.collectionCta[this.elem] + this.cta);
+            this.collectionPane.find('.js-filter--view .guide-card__cta').html('Add to my manifesto');
         },
-        changeOverviewCta: function () {
-            news.$('.js-slot-' + this.elem + '-all .guide-card__cta').html(this.overViewCta[this.elem] + this.cta);
-        }
 
     };
 

@@ -226,10 +226,14 @@ p.guide-card__note-policy {
 	position: relative;
 }
 
+	
 .guide-card__cta {
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAJ1BMVEUAAAAAf38Af38Af38Af38Af38Af38Af38Af38Af38Af38Af38Af3++ym5LAAAADHRSTlMAwJAw8OCAYFBAEKDtaJ7+AAAAlklEQVQoz2MYYoBZ8cwZIQM0MZkzQHAQVTTnTFDnDNUzx5DFuM+4g6iSMxuQFR5cAKK4ZJCUMp8RYGDgOcDAwHgGYSrjkQUQQS4fAbigzXEGiCBDzWG4oE4ATJD1EFxQRgEmyHQQLnimASbIcQYhOIHnDBgc4CQgiKkd0yJMJ+F1PKY3MQMEM+gIBDIiOghFHCKKhxYAAMDrTn/RGpXAAAAAAElFTkSuQmCC');
+	background-position: $baseline center;
 	border-top: 1px solid $borderColor;
-	border-right: 1px solid $borderColor;
-	color: #000000;
+	color: #007f7f;
 	width: auto;
 	text-decoration: none;
 	font-size: 0.875em;
@@ -238,27 +242,13 @@ p.guide-card__note-policy {
 	padding: 1.143em $gutter 0.857em $gutter;
 	display: block;
 	min-height: $baseline * 3;
-	margin-right: $baseline * 3.5;
+	padding-left: $baseline * 4;
 	overflow: hidden;
 }
 
-.guide-card__cta--pointer {
-	background-color: transparent;
-	background-repeat: no-repeat;
-	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAYAAAAI0W+oAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH3wMSBycasOS8BAAAANNJREFUOMvl0yFKBVEUBuDPCaJBsAg2TTaLYDEIJlfgFsSkO5C3hbcFXYLRYng8cN6ZGRANLsEiKAgjiNdyg/Ghc0HwwG0XPv7zc/jr03BTszvv/+qnUGKnYhqMJ6wUgxY4R4/TJbqGw2Lrq1lvuAhSflcdm8XA4CB4zNjbjNEDi0WwKcszRsF7Bu9q9kqmO/m2yn5wrGUt9/UZpIbrW7YGAxJVcBY85xRPwdHQa9oOJhn4CMYdq4Miufg+I/ct+6VKfw1eGo7TLw5/nkSXLRv+7XwBjKRT/FTH5iEAAAAASUVORK5CYII=');
-	background-image: url('data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0D%0A%3C%21DOCTYPE%20svg%20PUBLIC%20%22-//W3C//DTD%20SVG%201.1//EN%22%20%22http%3A//www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd%22%3E%0D%0A%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%20x%3D%220%22%20y%3D%220%22%0D%0A%09%20width%3D%2226%22%20height%3D%2216%22%20viewBox%3D%220%200%2026%2016%22%20enable-background%3D%22new%200%200%2026%2016%22%20xml%3Aspace%3D%22preserve%22%3E%0D%0A%3Cpolygon%20fill%3D%22%23CC0000%22%20points%3D%2224.611%2C7.484%2014.05%2C0.984%2014.05%2C3.171%2020.996%2C7.484%2014.05%2C11.797%2014.05%2C13.984%20%22/%3E%0D%0A%3C/svg%3E%0D%0A'), none;
-	background-position: -8px center;
-	padding-left: 25px;
-}
 
 .guide-card__share {
-	position: absolute;
-	top: 0;
-	right: 0;
-	height: 100%;
-	border-top: 1px solid $borderColor;
-	color: #000000;
-	width: $baseline * 3.5;
+	dipslay: none;
 }
 
 .guide-card__share,
@@ -271,7 +261,8 @@ p.guide-card__note-policy {
 }
 
 .guide-card__cta:hover {
-	color: #1167a8;
+	color: #004C4C;
+	text-decoration: underline;
 }
 
 .guide-card__issue--desc p {
@@ -385,10 +376,6 @@ p.guide-card__note-policy {
 		background-repeat: no-repeat;
 		margin-left: 3.2em;
 		padding-left: 0;
-	}
-
-	.guide-card__cta {
-		border-right: 1px solid $borderColor;
 	}
 
 }
