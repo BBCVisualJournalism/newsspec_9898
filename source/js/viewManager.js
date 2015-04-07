@@ -10,10 +10,12 @@ define([
 
         this.issuesPage = $('.page__issues');
         this.policiesPage = $('.page__policies');
+        this.resultsPage = $('.page__results');
 
         /* LISTENERS */
         news.pubsub.on('policies:chosen', $.proxy(this.policiesChosen, this));
         news.pubsub.on('results:show', $.proxy(this.showResults, this));
+        news.pubsub.on('reset', $.proxy(this.reset, this));
     }
 
     ViewManager.prototype = {
@@ -38,7 +40,7 @@ define([
         updateBreadcrumbs: function (position) {
             var breadcrumbs = $('.breadcrumb');
             breadcrumbs.removeClass('breadcrumb__active');
-            breadcrumbs.removeClass('.breadcrumb__teal');
+            breadcrumbs.removeClass('breadcrumb__teal');
 
 
             breadcrumbs.each(function (index) {
@@ -49,6 +51,14 @@ define([
                 }
             });
 
+        },
+
+        reset: function () {
+            this.updateBreadcrumbs(0);
+
+            this.policiesPage.hide();
+            this.resultsPage.hide();
+            this.issuesPage.show();
         }
 
     };
