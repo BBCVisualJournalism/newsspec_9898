@@ -1,1 +1,8 @@
-{}
+{
+    "nations": "Nations",
+    "country_short_uk": "UK",
+    "country_short_eng": "Eng",
+    "country_short_ni": "NI",
+    "country_short_sco": "Sco",
+    "country_short_wal": "Wal"
+}
