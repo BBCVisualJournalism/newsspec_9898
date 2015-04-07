@@ -288,7 +288,7 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
 
         changeCta: function () {
             this.collectionPane.find('.js-filter--view .guide-card__cta').html('Add to my manifesto');
-        },
+        }
 
     };
 

@@ -1,6 +1,7 @@
 .nav-buttons{
-	float: right;
 	margin-top: 16px;
+	overflow: hidden;
+	font: bold 16px Helvetica;
 
 	.nav-button {
 		padding: 10px 12px;
@@ -18,5 +19,29 @@
 			background-image: linear-gradient(transparent, transparent), url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMCIgeT0iMCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgNDAgNDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDQwIDQwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjRkZGIiBwb2ludHM9IjI2LjIsMTkuOSAxNS42LDEzLjQgMTUuNiwxNS42IDIyLjYsMTkuOSAxNS42LDI0LjMgMTUuNiwyNi41ICIvPjwvc3ZnPg==);
 			background-position: -15px -12px;
 		}
+
+		.restart-icon{
+			display: inline-block;
+			width: 17px;
+			height: 17px;
+			background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAMFBMVEUAAAD///////////////////////////////////////////////////////////87TQQwAAAAD3RSTlMAIKAwEPDQYELAgOCQcLArALOeAAAAdUlEQVQoz2MYaYDZAIugaQgWhfHpmEpF////3YAuyPT///9PGEr1E6v/L8BQqsCS/xGLA+T/YBFk+onqoEYQyfUfRZDzFzbBf1i08/43wLSIJT4FSKA7qf5rCUv1/wuoguz/gQDDmZ3//39rwHC5xAoBhpEFAFpBJ5pCFZd/AAAAAElFTkSuQmCC);
+			background-image: linear-gradient(transparent, transparent), url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMCIgeT0iMCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgNDAgNDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDQwIDQwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjRkZGIiBkPSJNMjAuNSwxMy43SDIwbDEtMWwtMS0xbC0zLjEsMy4xbDMuMSwzLjFsMS0xbC0xLTFoMC41YzIuOSwwLDUuMiwyLjMsNS4yLDUuMnMtMi4zLDUuMi01LjIsNS4yYy0yLjksMC01LjItMi4zLTUuMi01LjJoLTIuMWMwLDQsMy4zLDcuMyw3LjMsNy4zczcuMy0zLjMsNy4zLTcuM0MyNy44LDE3LDI0LjUsMTMuNywyMC41LDEzLjd6Ii8+PC9zdmc+);
+			background-position: -13px -12px;
+		}
+	}
+
+	.choose-policy{
+		float: right;
+	}
+
+	.skip-policy{
+		margin-left: 10px;
+	}
+
+	.nav-buttons--right{
+		float: right;
+	}
+	.nav-buttons--left{
+		float: left;
 	}
 }

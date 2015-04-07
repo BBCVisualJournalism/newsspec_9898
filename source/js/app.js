@@ -1,11 +1,11 @@
 define([
     'lib/news_special/bootstrap',
-    'issues',
+    'viewManager',
     'nation-filter',
     'collection-view',
     'card-model',
     'lib/news_special/share_tools/controller'
-], function (news, IssuesView, NationFilter, CollectionView, CardModel, ShareTools) {
+], function (news, ViewManager, NationFilter, CollectionView, CardModel, ShareTools) {
 
     var filterBy = {
             'issue': 'party',
@@ -143,13 +143,10 @@ define([
         addCollectionViewToApplication(options);
         listenForComponentStateChanges();
 
-        new IssuesView();
+        new ViewManager();
 
         news.sendMessageToremoveLoadingImage();
         $('.main').show();
-
-        // TODO just to test pubsub Remove
-        news.pubsub.emit('collection:view:show-policy', ['health']);
     }
 
     return {

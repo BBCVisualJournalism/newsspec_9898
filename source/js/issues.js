@@ -24,6 +24,7 @@ define([
 			this.issues.filter('.issue__checked').each(function () {
 				selectedOptions.push($(this).data('issue'));
 			});
+			news.pubsub.emit('policies:chosen', [selectedOptions]);
 		}
 
 	};
