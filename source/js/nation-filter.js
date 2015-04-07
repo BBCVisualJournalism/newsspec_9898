@@ -40,7 +40,7 @@ define(['lib/news_special/bootstrap'], function (news) {
             console.log('emit filter');
             news.pubsub.emit('nation:filter:change', [this.state]);
             
-        },
+        }
 
     };
 
