@@ -10,7 +10,6 @@ define([
         this.issuesEl = $('.page__issues');
         this.policyHeaderText = this.el.find('#policy-header--name');
         this.policyBreadcrumbText = this.el.find('#policy-name-text');
-        news.pubsub.on('popup:confirm:issue', $.proxy(this.showNextPolicy, this));
         this.el.find('.start-again').on('click', this.startAgain);
     };
 

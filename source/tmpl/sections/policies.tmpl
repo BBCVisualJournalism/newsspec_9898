@@ -5,53 +5,56 @@
 	</div>
 	<h2>Your <span id="policy-header--name"></span> policy:</h2>
 	<p>Find the policy below that you most agree with and add it to your manifesto. </p>
-	<%= include('sections/nation-filter.tmpl') %>
 
-	<div id="js-issue-collection-view-container" class='collection-view-container issue-guide__filter-uk'>
+	<div class="policy-cards">
+		<%= include('sections/nation-filter.tmpl') %>
+
+		<div id="js-issue-collection-view-container" class='collection-view-container issue-guide__filter-uk'>
+		</div>
+
+		<script type="text/html" id="js-issue-two-column-collection-view-tmpl">
+		    <div class="issue-guide__cards--collection issue-guide__cards--collection--issue issue-guide__cards--collection--two-column clearfix">   
+			<div class="js-filter--view">
+			    <div class="issue-guide__cards--collection--slot js-slot-issue-uk js-slot-issue">
+				<%= include('sections/collection-view/2col-party-uk.tmpl') %>
+				</div>
+				<div class="issue-guide__cards--collection--slot js-slot-issue-eng js-slot-issue">
+			       <%= include('sections/collection-view/2col-party-eng.tmpl') %>
+				</div>
+				<div class="issue-guide__cards--collection--slot js-slot-issue-ni js-slot-issue">
+			       <%= include('sections/collection-view/2col-party-ni.tmpl') %>
+				</div>
+				<div class="issue-guide__cards--collection--slot js-slot-issue-scot js-slot-issue">
+				<%= include('sections/collection-view/2col-party-scot.tmpl') %>
+				</div>
+				<div class="issue-guide__cards--collection--slot js-slot-issue-cym js-slot-issue">
+				<%= include('sections/collection-view/2col-party-cym.tmpl') %>
+				</div>
+			</div>  
+		    </div> 
+		</script>
+		<script type="text/html" id="js-issue-one-column-collection-view-tmpl">
+		    <div class="issue-guide__cards--collection issue-guide__cards--collection--issue issue-guide__cards--collection--one-column clearfix">   
+			<div class="js-filter--view">
+			    <div class="issue-guide__cards--collection--slot js-slot-issue-uk js-slot-issue">
+				<%= include('sections/collection-view/1col-party-uk.tmpl') %>          
+			    </div>
+			    <div class="issue-guide__cards--collection--slot js-slot-issue-eng js-slot-issue">
+				<%= include('sections/collection-view/1col-party-eng.tmpl') %>               
+			    </div>
+			    <div class="issue-guide__cards--collection--slot js-slot-issue-ni js-slot-issue">
+				<%= include('sections/collection-view/1col-party-ni.tmpl') %>                
+			    </div>
+			    <div class="issue-guide__cards--collection--slot js-slot-issue-scot js-slot-issue">
+				<%= include('sections/collection-view/1col-party-scot.tmpl') %>           
+			    </div>
+			    <div class="issue-guide__cards--collection--slot js-slot-issue-cym js-slot-issue">
+				 <%= include('sections/collection-view/1col-party-cym.tmpl') %>              
+			    </div>
+			</div>  
+		    </div> 
+		</script>
 	</div>
-
-	<script type="text/html" id="js-issue-two-column-collection-view-tmpl">
-	    <div class="issue-guide__cards--collection issue-guide__cards--collection--issue issue-guide__cards--collection--two-column clearfix">   
-		<div class="js-filter--view">
-		    <div class="issue-guide__cards--collection--slot js-slot-issue-uk js-slot-issue">
-			<%= include('sections/collection-view/2col-party-uk.tmpl') %>
-			</div>
-			<div class="issue-guide__cards--collection--slot js-slot-issue-eng js-slot-issue">
-		       <%= include('sections/collection-view/2col-party-eng.tmpl') %>
-			</div>
-			<div class="issue-guide__cards--collection--slot js-slot-issue-ni js-slot-issue">
-		       <%= include('sections/collection-view/2col-party-ni.tmpl') %>
-			</div>
-			<div class="issue-guide__cards--collection--slot js-slot-issue-scot js-slot-issue">
-			<%= include('sections/collection-view/2col-party-scot.tmpl') %>
-			</div>
-			<div class="issue-guide__cards--collection--slot js-slot-issue-cym js-slot-issue">
-			<%= include('sections/collection-view/2col-party-cym.tmpl') %>
-			</div>
-		</div>  
-	    </div> 
-	</script>
-	<script type="text/html" id="js-issue-one-column-collection-view-tmpl">
-	    <div class="issue-guide__cards--collection issue-guide__cards--collection--issue issue-guide__cards--collection--one-column clearfix">   
-		<div class="js-filter--view">
-		    <div class="issue-guide__cards--collection--slot js-slot-issue-uk js-slot-issue">
-			<%= include('sections/collection-view/1col-party-uk.tmpl') %>          
-		    </div>
-		    <div class="issue-guide__cards--collection--slot js-slot-issue-eng js-slot-issue">
-			<%= include('sections/collection-view/1col-party-eng.tmpl') %>               
-		    </div>
-		    <div class="issue-guide__cards--collection--slot js-slot-issue-ni js-slot-issue">
-			<%= include('sections/collection-view/1col-party-ni.tmpl') %>                
-		    </div>
-		    <div class="issue-guide__cards--collection--slot js-slot-issue-scot js-slot-issue">
-			<%= include('sections/collection-view/1col-party-scot.tmpl') %>           
-		    </div>
-		    <div class="issue-guide__cards--collection--slot js-slot-issue-cym js-slot-issue">
-			 <%= include('sections/collection-view/1col-party-cym.tmpl') %>              
-		    </div>
-		</div>  
-	    </div> 
-	</script>
 
 	<div class="nav-buttons">
 		<div class="nav-buttons--right">

@@ -1,12 +1,14 @@
 define([
     'lib/news_special/bootstrap',
     'issues',
-    'policies'
-], function (news, IssuesView, PoliciesView) {
+    'policies',
+    'confirmation'
+], function (news, IssuesView, PoliciesView, ConfirmationView) {
 
     function ViewManager() {
         this.issueView = new IssuesView();
         this.policiesView = new PoliciesView();
+        this.confirmationView = new ConfirmationView();
 
         this.issuesPage = $('.page__issues');
         this.policiesPage = $('.page__policies');

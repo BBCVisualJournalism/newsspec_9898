@@ -23,4 +23,37 @@
 
 		}
 	}
+
+	.policy-cards--confirm{
+		background-color: #171717;
+		transition: 0.6s;
+
+		.guide-card, .nation-filter{
+			opacity: 0;
+			transition: opacity 0.6s;
+		}
+
+		.focused-card{
+			opacity: 100;
+		}
+
+		.guide-card__footer{
+			display: none;
+		}
+	}
+
+	.policy-cards--confirm__sec{
+		.issue-guide__cards--column-pri{
+			width: 0;
+			margin: 0;
+			border: 0;
+			padding: 0;
+			overflow: hidden;
+			transition: width 1s;
+		}
+
+		.issue-guide__cards--column-sec{
+			padding: 0;
+		}
+	}
 }
