@@ -21,7 +21,7 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
         if (opts.partyDefaultNation) {this.partyDefaultNation  = opts.partyDefaultNation; } else { this.partyDefaultNation = {}; }
         if (opts.nations) {this.nations = opts.nations; } else {throw new Error('ConstructorError: no nations'); }
         
-        if (window.innerWidth > 700) {this.viewState = 'two-column'; } else {this.viewState = 'one-column'; }
+        if (this.windowWidth() > 700) {this.viewState = 'two-column'; } else {this.viewState = 'one-column'; }
         this.vocabs = opts.vocabs;
         this.collectionPane = news.$('#js-' + this.elem + '-collection-view-container');
         this.collectionTemplate = news.$('#js-' + this.elem + '-' + this.viewState + '-collection-view-tmpl');
@@ -34,19 +34,20 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
         //TODO make a little neater
         determineViewSize: function () {
             var CollectionView = this;
-            if (window.innerWidth < 701 && CollectionView.viewState !== 'one-column') {
+            var width = this.windowWidth();
+            if (width < 701 && CollectionView.viewState !== 'one-column') {
                 CollectionView.viewState = 'one-column';
                 CollectionView.collectionTemplate = news.$('#js-' + CollectionView.elem + '-' + CollectionView.viewState + '-collection-view-tmpl');
                 this.render(this.collectionPane, this.collectionTemplate.html());
                 CollectionView.addRefreshMask();
-                news.pubsub.emit('collection:view:resize', [this.elem]);
+                news.pubsub.emit('collection:view:resize', [this.state]);
             }
-            if (window.innerWidth > 700 && CollectionView.viewState !== 'two-column') {
+            if (width > 700 && CollectionView.viewState !== 'two-column') {
                 CollectionView.viewState = 'two-column';
                 CollectionView.collectionTemplate = news.$('#js-' + CollectionView.elem + '-' + CollectionView.viewState + '-collection-view-tmpl');
                 this.render(this.collectionPane, this.collectionTemplate.html());
                 CollectionView.addRefreshMask();
-                news.pubsub.emit('collection:view:resize', [this.elem]);
+                news.pubsub.emit('collection:view:resize', [this.state]);
             }
         },
         render: function (target, template) {
@@ -76,7 +77,6 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
             news.pubsub.on('collection:view:apply:filter', function (data) {
                 CollectionView.applyFilters(data);
             });
-            console.log(news.$(window));
             news.$(window).resize(function () {
                 CollectionView.determineViewSize();
             });
@@ -100,6 +100,9 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
                 news.pubsub.emit('popup:confirm:issue', [identifier]);
             }
 
+            CollectionView.openCloseCards(news.$(event.currentTarget).find('article'), event.target);
+
+
         },
 
         openCloseCards: function (card, element) {
@@ -120,29 +123,10 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
             this.removeRefreshMask();
         },
 
-        //TODO these three functions have a lot of repitition - functional programming??
-        showOverviewCards: function (cards) {
-            for (var card in cards) {
-                var tmpElement = news.$(document.createElement('DIV')),
-                    slot;
-                tmpElement.append(cards[card].cloneNode(true));
-                slot = tmpElement.find('article').data(this.elem);
-                        
-                news.$('.js-slot-' + this.elem + '-all .js-slot-' + slot).empty();
-                news.$('.js-slot-' + this.elem + '-all .js-slot-' + slot).append(cards[card].cloneNode(true));
-            }
-            this.changeOverviewCta();
-            this.removeRefreshMask();
-        },
-
         showCards: function (cards) {
             this.trumpCardPlaced = {};
             news.$('.issue-guide__cards--collection--' + this.elem + ' .js-slot').empty();
-            if (this.elem === 'issue') {
-                this.displayIssueCards(cards);
-            } else if (this.elem === 'party') {
-                this.displayPartyCards(cards);
-            }
+            this.displayIssueCards(cards);
             this.changeCta();
             this.removeRefreshMask();
         },
@@ -175,36 +159,6 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
             }
         },
 
-        displayPartyCards: function (cards) {
-            for (var card in cards) {
-                var tmpElement = news.$(document.createElement('DIV')),
-                    slotByView,
-                    slotByDropDown;
-                tmpElement.append(cards[card].cloneNode(true));
-                slotByView = tmpElement.find('article').data(this.elem);
-                slotByDropDown = tmpElement.find('article').data(this.filterBy[this.elem]);
-                slotByNation = tmpElement.find('article').data('nation');
-                if (slotByNation === this.partyDefaultNation[slotByView]) {
-                    //TODO can I use loopThroughAndAddCardsToMultipleViews        
-                    for (var i = this.regionalOrNationalPartyInWestminster[slotByView].length - 1; i >= 0; i--) {
-                        if (this.hasADevolvedTrumpingCardBeenPlacedAlready(slotByDropDown, this.regionalOrNationalPartyInWestminster[slotByView][i]) === false) {
-                            news.$('.js-slot-party-' + this.regionalOrNationalPartyInWestminster[slotByView][i] + ' .js-slot-' +  slotByDropDown).empty();
-                            news.$('.js-slot-party-' + this.regionalOrNationalPartyInWestminster[slotByView][i] + ' .js-slot-' +  slotByDropDown).append(cards[card].cloneNode(true));
-                        }
-                    }
-                } else {
-                    this.addCardToTrumpCardList(slotByDropDown, slotByNation);
-                    news.$('.js-slot-party-' + slotByNation + ' .js-slot-' +  slotByDropDown).empty();
-                    news.$('.js-slot-party-' + slotByNation + ' .js-slot-' +  slotByDropDown).append(cards[card].cloneNode(true));
-                }
-                news.pubsub.emit('collection:share:request:' + this.elem, [{
-                    'nation': slotByNation,
-                    'type': this.elem,
-                    'slot': slotByDropDown
-                }]);
-            }
-            news.$('.issue-guide__cards--collection--issue article[data-' + this.elem + '="' + this.openStates + '"]').addClass('guide-card--expanded');
-        },
 
         loopThroughAndAddCardsToMultipleViews: function (slotByDropDown, slotByNation, card, trumpCheck, addTrump) {
             
@@ -239,7 +193,6 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
         },
 
         applyFilters: function (filter) {
-            console.log('applyFilters');
             news.$('.collection-view-container').removeClass(function (index, css) {
                 return (css.match(/\bissue-guide__filter-\S+/g) || []).join(' ');
             });
@@ -266,19 +219,11 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
         },
 
         buildEndPoint: function (request) {
-            if (request['selection'] === 'all') {
-                return this.endpoint;
-            } else {
-                return '/indepthtoolkit/issues-guide/' + request['type'] + '/' + request['selection'] + '/policies';
-            }
+            return '/indepthtoolkit/issues-guide/' + request['type'] + '/' + request['selection'] + '/policies';
         },
 
         whatHost: function (request) {
-            if (request['selection'] === 'all') {
-                return this.staticHost;
-            } else {
-                return false;
-            }
+            return false;
         },
 
         changeState: function (item) {
@@ -288,6 +233,10 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
 
         changeCta: function () {
             this.collectionPane.find('.js-filter--view .guide-card__cta').html('Add to my manifesto');
+        },
+
+        windowWidth: function () {
+            return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         }
 
     };

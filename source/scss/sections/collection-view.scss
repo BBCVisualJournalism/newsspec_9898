@@ -1,5 +1,6 @@
 $backgroundColor: #ededed;
 
+
 @mixin hideContent() {
     display: block;
     -webkit-transition: opacity 0.5s cubic-bezier(0.38, 0.68, 0.3, 1);
@@ -17,10 +18,33 @@ $backgroundColor: #ededed;
     max-height: 100%;
 }
 
-.issue-guide__collection {
+.policies__card-container {
+    transition: background-color 0.6s;
+    margin-top: 0.5em;
+    padding-top: 1em;
     min-height: 500px;
     background: $backgroundColor;
 }
+
+
+.issue-guide__cards--collection--one-column {
+    .guide-card--policy {
+        margin-bottom: 8px;
+    }
+}
+
+
+.issue-guide__cards--collection{
+    margin: 0.5em 1rem;
+}
+
+@include respondMinMax(701px, false){
+    .issue-guide__cards--collection{
+        margin: 1em 7%;
+    }
+}
+
+
 
 .issue-guide__cards--collection--two-column {
     .issue-guide__cards--column {
@@ -43,6 +67,7 @@ $backgroundColor: #ededed;
 .js-slot {
     @include hideContent();
     overflow: hidden;
+    position: relative;
 }
 
 
@@ -99,4 +124,74 @@ $backgroundColor: #ededed;
     font-size: 0;
     height: 0;
     visibility: hidden;
+}
+
+//TODO this is not CSS linting need to fix
+@-webkit-keyframes spinnerRotate
+{
+    from{-webkit-transform:rotate(0deg);}
+    to{-webkit-transform:rotate(360deg);}
+}
+@-moz-keyframes spinnerRotate
+{
+    from{-moz-transform:rotate(0deg);}
+    to{-moz-transform:rotate(360deg);}
+}
+@-ms-keyframes spinnerRotate
+{
+    from{-ms-transform:rotate(0deg);}
+    to{-ms-transform:rotate(360deg);}
+}
+
+.js-loading-spinner {
+    position: fixed;
+    display: block;
+    margin: 50px auto;
+    width: 33px;
+    height: 33px;
+    max-width: 33px;
+    left: 48%;
+    
+    -webkit-animation-name: spinnerRotate;
+    -webkit-animation-duration: 5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spinnerRotate;
+    -moz-animation-duration: 5s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spinnerRotate;
+    -ms-animation-duration: 5s;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+
+     background-image: url('data:image/gif;base64,R0lGODlhIQAhAIQPAMPDw/Dw8BAQECAgIICAgHBwcKCgoDAwMFBQULCwsGBgYEBAQODg4JCQkAAAAP///////////////////////////////////////////////////////////////////yH5BAEAAA8ALAAAAAAhACEAAAXS4COO5AgQaKmubII4MMzOKzDEOK2LBe7vtIMPJlgsgCwhTlAAIGcvHOJJa/gM1BlDgMNmRw2SAkf4ihK3wogLO5gfPaLIgHOaAd3HGDZ4i24wCg+ADmp+cQ59OAl+Dwk5dY14MQyRfpMylm+YDg+LjY8xgzGGb4h9e4mNhIJ0MXZfnF5sDm5mSg4CI6kOZVkEOIIiW3lPrkQMJFbFO8cwYSVRMVM60jDUKrhETSoABbRtQUO5RkbgMbY0iOPspTo27EMDsEgu8Q4IjJco/AT0LCEAADs=');
+}
+
+.js-load-mask {
+    .issue-guide__cards--collection,
+    .issue-guide__cards--collection--slot{
+        .issue-guide__cards--column {
+            .js-slot {
+            opacity: 0.3;
+            }
+        }
+    }
+
+}
+
+.js-slot .confirm-buttons{
+    display: none;
+    margin-top: 10px;
+}
+
+@include respondMinMax(701px, false){
+    .js-slot .confirm-buttons{
+        margin: 0;
+        z-index: 99;
+        position: absolute;
+        width: 210px;
+        right: -224px;
+        top: 0;
+    }
 }

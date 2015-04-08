@@ -4,7 +4,8 @@ define([
     'nation-filter',
     'collection-view',
     'card-model',
-    'lib/news_special/share_tools/controller'
+    'lib/news_special/share_tools/controller',
+    'lib/vendors/jquery/ajax.ie8'
 ], function (news, ViewManager, NationFilter, CollectionView, CardModel, ShareTools) {
 
     var filterBy = {
@@ -102,9 +103,6 @@ define([
         });
         news.pubsub.on('collection:view:show-policy', function (data) {
             requestNewCollectionViewBasedOnState(data);
-        });
-        news.pubsub.on('popup:confirm:issue', function (data) {
-            console.log('Oh my word you have just added the ' + data + ' card, who would have funk it');
         });
     }
 

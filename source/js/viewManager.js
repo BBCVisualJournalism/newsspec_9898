@@ -32,11 +32,13 @@ define([
             this.updateBreadcrumbs(1);
         },
 
-        showResults: function () {
+        showResults: function (chosenPolicies) {
             this.issuesPage.hide();
             this.policiesPage.hide();
 
             this.updateBreadcrumbs(2);
+
+            console.log(chosenPolicies);
         },
 
         updateBreadcrumbs: function (position) {

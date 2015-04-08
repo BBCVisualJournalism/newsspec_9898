@@ -10,13 +10,18 @@ define([
         this.issuesEl = $('.page__issues');
         this.policyHeaderText = this.el.find('#policy-header--name');
         this.policyBreadcrumbText = this.el.find('#policy-name-text');
+
         this.el.find('.start-again').on('click', this.startAgain);
+        this.el.find('#skip-policy').on('click', $.proxy(this.skipPolicy, this));
+
+        news.pubsub.on('policy:confirmed', $.proxy(this.processPolicy, this));
     };
 
     Policies.prototype = {
 
         setPolicies: function (polcies) {
             this.userPolicies = polcies;
+            this.selectedPolicies = [];
             this.policyPosition = 0;
 
             this.setupPolicyBreadcrumbs();
@@ -32,7 +37,7 @@ define([
 
                 this.policyPosition++;
             } else {
-                news.pubsub.emit('results:show');
+                news.pubsub.emit('results:show', [this.selectedPolicies]);
             }
         },
 
@@ -73,6 +78,16 @@ define([
 
         startAgain: function () {
             news.pubsub.emit('reset');
+        },
+
+        processPolicy: function (policyId) {
+            this.selectedPolicies.push(policyId);
+            this.showNextPolicy();
+        },
+
+        skipPolicy: function () {
+            news.pubsub.emit('issue:skipped');
+            this.showNextPolicy();
         }
 
     };

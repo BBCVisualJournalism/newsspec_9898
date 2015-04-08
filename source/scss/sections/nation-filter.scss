@@ -9,10 +9,9 @@
     margin: 0;
 }
 
-@media (min-width: 701px) {
+@include respondMinMax(701px, false){
   .nation-filter {
-    width: 86%;
-    margin: 0 7% 0;;
+    margin: 0 7%;
   }
 }
 
@@ -24,7 +23,7 @@
     box-sizing: border-box;
     height: auto;
     list-style: none;
-    margin: 0 1rem 0;;
+    margin: 0.5em 1rem;
 
 
     .nation-filter__title,

@@ -24,36 +24,53 @@
 		}
 	}
 
-	.policy-cards--confirm{
+	.issue-guide__cards--column-pri{
+		transition: width 0.8s;
+	}
+
+	.policies__card-container--confirm{
 		background-color: #171717;
-		transition: 0.6s;
+
+		.js-slot {
+		    overflow: visible;
+		}
 
 		.guide-card, .nation-filter{
 			opacity: 0;
-			transition: opacity 0.6s;
+			pointer-events: none;
+			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 		}
 
 		.focused-card{
-			opacity: 100;
+			opacity: 1;
+			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+			margin-bottom: 50px;
 		}
 
-		.guide-card__footer{
+		.focused-card .guide-card__footer{
 			display: none;
+		}
+
+		.issue-guide__cards--collection--issue .guide-card--policy .guide-card__party:after,{
+			display: none;
+			content: ' ';
 		}
 	}
 
-	.policy-cards--confirm__sec{
-		.issue-guide__cards--column-pri{
-			width: 0;
-			margin: 0;
-			border: 0;
-			padding: 0;
-			overflow: hidden;
-			transition: width 1s;
-		}
+	@include respondMinMax(701px, false){
+		.policies__card-container--confirm__sec{
+			.issue-guide__cards--column-pri{
+				width: 0;
+				height: 50px;
+				margin: 0;
+				border: 0;
+				padding: 0;
+				overflow: hidden;
+			}
 
-		.issue-guide__cards--column-sec{
-			padding: 0;
+			.issue-guide__cards--column-sec{
+				padding: 0;
+			}
 		}
 	}
 }
