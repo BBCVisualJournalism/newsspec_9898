@@ -261,8 +261,9 @@ p.guide-card__note-policy {
 }
 
 .guide-card__cta:hover {
-	color: #004C4C;
-	text-decoration: underline;
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAJ1BMVEUAAAD///////////////////////////////////////////////+uPUo5AAAADHRSTlMAwJAw8OCAYFBAEKDtaJ7+AAAAlklEQVQoz2MYYoBZ8cwZIQM0MZkzQHAQVTTnTFDnDNUzx5DFuM+4g6iSMxuQFR5cAKK4ZJCUMp8RYGDgOcDAwHgGYSrjkQUQQS4fAbigzXEGiCBDzWG4oE4ATJD1EFxQRgEmyHQQLnimASbIcQYhOIHnDBgc4CQgiKkd0yJMJ+F1PKY3MQMEM+gIBDIiOghFHCKKhxYAAMDrTn/RGpXAAAAAAElFTkSuQmCC');
+	background-color: #007f7f;
+	color: #fff;
 }
 
 .guide-card__issue--desc p {
