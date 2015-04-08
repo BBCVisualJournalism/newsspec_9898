@@ -1,3 +1,26 @@
 .page__policies{
 	display: none;
+
+	.policy_breadcrumbs{
+		width: 100%;
+		max-width: 550px;
+		font: 16px Helvetica;
+
+		.policy_breadcrumbs--bars{
+			margin: 4px 0 16px 0;
+			overflow: hidden;
+
+			.policy_breadcrumbs--bar{
+				float: left;
+				border-right: 2px solid white;
+				background-color: #ccc;
+				height: 4px;
+			}
+
+			.policy_breadcrumbs--bar__active{
+				background-color: #3e3e3e;
+			}	
+
+		}
+	}
 }

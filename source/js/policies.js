@@ -5,8 +5,11 @@ define([
 
     var Policies = function () {
         this.el = $('.page__policies');
+        this.barsContainer = this.el.find('.policy_breadcrumbs--bars');
+        this.policyCountText = this.el.find('#policy-count-text');
         this.issuesEl = $('.page__issues');
         this.policyHeaderText = this.el.find('#policy-header--name');
+        this.policyBreadcrumbText = this.el.find('#policy-name-text');
         news.pubsub.on('popup:confirm:issue', $.proxy(this.showNextPolicy, this));
         this.el.find('.start-again').on('click', this.startAgain);
     };
@@ -17,7 +20,7 @@ define([
             this.userPolicies = polcies;
             this.policyPosition = 0;
 
-            this.addPolicyBars();
+            this.setupPolicyBreadcrumbs();
 
         },
 
@@ -26,6 +29,7 @@ define([
                 var policyKey = this.userPolicies[this.policyPosition];
                 this.setPolicyHeaderText(policyKey);
                 news.pubsub.emit('collection:view:show-policy', policyKey);
+                this.updatePolicyBreadcrumbs();
 
                 this.policyPosition++;
             } else {
@@ -33,25 +37,38 @@ define([
             }
         },
 
-        addPolicyBars: function () {
+        setupPolicyBreadcrumbs: function () {
+            var barsHtml = '',
+                percentage = (100 / this.userPolicies.length).toString() + '%';
 
+            for (var i = 0; i < this.userPolicies.length; i++) {
+                barsHtml += '<div class="policy_breadcrumbs--bar" style="width: ' + percentage + '"></div>';
+            }
+
+            this.barsContainer.html(barsHtml);
+            this.updatePolicyBreadcrumbs();
         },
 
         setPolicyHeaderText: function (policyKey) {
             var policyText = this.issuesEl.find('[data-issue="' + policyKey + '"]').text();
 
             this.policyHeaderText.text(policyText);
+            this.policyBreadcrumbText.text(policyText);
         },
 
-        updatePolicyBars: function () {
-            var policyBars = $('.policy-bar');
-            policyBars.removeClass('policy-bar__complete');
+        updatePolicyBreadcrumbs: function () {
+            var policyBars = this.barsContainer.find('.policy_breadcrumbs--bar'),
+                Policies = this;
+
+            policyBars.removeClass('policy_breadcrumbs--bar__active');
 
             policyBars.each(function (index) {
-                if (index <= this.policyPosition) {
-                    $(this).addClass('policy-bar__complete');
+                if (index <= Policies.policyPosition) {
+                    $(this).addClass('policy_breadcrumbs--bar__active');
                 }
             });
+
+            this.policyCountText.text('Policy ' + (this.policyPosition + 1) + ' of ' + this.userPolicies.length);
 
         },
 
