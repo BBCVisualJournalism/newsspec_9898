@@ -1,0 +1,51 @@
+.page__results{
+	display: none;
+	
+	.bar-chart{
+		max-width: 550px;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+
+		li{
+			margin-top: 16px;
+		}
+
+		.bar-chart--bar{
+			display: inline-block;
+			height: 18px;
+			vertical-align: top;
+		}
+
+		.bar-chart--label{
+			display: inline-block;
+			padding-top: 3px;
+			font: 16px Helvetica;
+		}
+
+		.bar-chart--bar-party__oth{ background-color: $partyColourOth; }
+		.bar-chart--bar-party__con{ background-color: $partyColourCon; }
+		.bar-chart--bar-party__lab{ background-color: $partyColourLab; }
+		.bar-chart--bar-party__ld{ background-color: $partyColourLd; }
+		.bar-chart--bar-party__snp{ background-color: $partyColourSnp; }
+		.bar-chart--bar-party__pc{ background-color: $partyColourPc; }
+		.bar-chart--bar-party__ukip{ background-color: $partyColourUkip; }
+		.bar-chart--bar-party__grn{ background-color: $partyColourGrn; }
+		.bar-chart--bar-party__res{ background-color: $partyColourRes; }
+		.bar-chart--bar-party__dup{ background-color: $partyColourDup; }
+		.bar-chart--bar-party__sf{ background-color: $partyColourSf; }
+		.bar-chart--bar-party__sdlp{ background-color: $partyColourSdlp; }
+		.bar-chart--bar-party__ap{ background-color: $partyColourAp; }
+		.bar-chart--bar-party__ni21{ background-color: $partyColourNi21; }
+		.bar-chart--bar-party__tuv{ background-color: $partyColourTuv; }
+		.bar-chart--bar-party__uup{ background-color: $partyColourUup; }
+		.bar-chart--bar-party__bnp{ background-color: $partyColourBnp; }
+		.bar-chart--bar-party__ed{ background-color: $partyColourEd; }
+		.bar-chart--bar-party__pup{ background-color: $partyColourPup; }
+		.bar-chart--bar-party__tusc{ background-color: $partyColourTusc; }
+		.bar-chart--bar-party__mk{ background-color: $partyColourMk; }
+		.bar-chart--bar-party__nha{ background-color: $partyColourNha; }
+		.bar-chart--bar-party__yf{ background-color: $partyColourYf; }
+		.bar-chart--bar-party__ssp{ background-color: $partyColourSsp; }
+	}
+}
