@@ -145,6 +145,7 @@ define([
 
         news.sendMessageToremoveLoadingImage();
         $('.main').show();
+        news.pubsub.emit('results:show', [['snp-immigration-scot', 'con-benefits-uk', 'ukip-education-uk']]);
     }
 
     return {

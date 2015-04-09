@@ -22,6 +22,10 @@ define(['lib/news_special/bootstrap'], function (news) {
             news.pubsub.on('model:card:request', function (data) {
                 CardModel.supplyCards(data);
             });
+            news.pubsub.on('fetch:policy-cards', function (data) {
+                CardModel.hostDomain = CardModel.pal;
+                CardModel.extractIssues(data);
+            });
         },
 
         supplyCards: function (data) {
@@ -70,6 +74,38 @@ define(['lib/news_special/bootstrap'], function (news) {
                 });
             });
             news.pubsub.emit('model:card:request:' + requestor, [cache[endpoint]]);
+        },
+
+        extractIssues: function (cards) {
+            var issues = [],
+                promiseCount = cards.length;
+
+            this.isCachePopulated(cards, promiseCount);
+
+            for (var i = cards.length - 1; i >= 0; i--) {
+                var currentIssue = cards[i].split('-')[1];
+                this.fetchHtml('/indepthtoolkit/issues-guide/issues/' + currentIssue + '/policies', 'internal');
+            }
+        },
+
+        isCachePopulated: function (cards, count) {
+            var CardModel = this,
+                thisCount = count;
+            news.pubsub.on('model:card:request:internal', function () {
+                thisCount--;
+                if (thisCount === 0) {
+                    CardModel.buildResultCardsObject(cards);
+                }
+            });
+        },
+
+        buildResultCardsObject: function (cards) {
+            var resultCards = {};
+            for (var i = cards.length - 1; i >= 0; i--) {
+                var thisFragment = cache['/indepthtoolkit/issues-guide/issues/' + cards[i].split('-')[1] + '/policies'][cards[i]];
+                resultCards[cards[i]] = thisFragment;
+            }
+            news.pubsub.emit('fetch:policy-cards:complete', [resultCards]);
         }
 
     };

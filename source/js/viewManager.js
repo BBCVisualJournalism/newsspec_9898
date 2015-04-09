@@ -39,6 +39,7 @@ define([
             this.updateBreadcrumbs(2);
 
             console.log(chosenPolicies);
+            news.pubsub.emit('fetch:policy-cards', [chosenPolicies]);
         },
 
         updateBreadcrumbs: function (position) {
