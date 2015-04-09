@@ -1,9 +1,11 @@
 define([
     'lib/news_special/bootstrap',
-    'lib/news_special/template_engine'
-], function (news, TemplateEngine) {
+    'lib/news_special/template_engine',
+    'lib/news_special/share_tools/controller'
+], function (news, TemplateEngine, ShareTools) {
 
-    var Results = function () {
+    var Results = function (options) {
+        this.partyNames = options.partyNames;
         this.el = $('.page__results');
         this.barChart = this.el.find('.bar-chart');
 
@@ -16,11 +18,12 @@ define([
             this.results = results;
 
             this.drawChart();
+            this.addShareTools();
         },
 
         drawChart: function () {
             var orderedData = this.chartCollateData(),
-                barTemplateHtml = this.el.find('#bar-chart-bar-html').html();
+                barTemplateHtml = this.el.find('#bar-chart-bar-html').html(),
                 templateEngine = new TemplateEngine(),
                 _this = this;
 
@@ -29,8 +32,8 @@ define([
             for (var i = 0; i < orderedData.length; i++) {
                 var barProperties = {
                         partyCode: orderedData[i][0],
-                        partyName:  orderedData[i][0],
-                        count:  orderedData[i][1],
+                        partyName:  _this.partyNames[orderedData[i][0]],
+                        count: orderedData[i][1]
                     },
                     barHtml = templateEngine.render(barTemplateHtml, barProperties);
 
@@ -52,7 +55,7 @@ define([
             /* Find the longest bar */
             _this.el.find('.bar-chart--label').each(function () {
                 var labelWidth = $(this).width();
-                if(labelWidth > maxWidth) {
+                if (labelWidth > maxWidth) {
                     maxWidth = labelWidth;
                 }
             });
@@ -76,13 +79,29 @@ define([
                 collatedData[partyCode] = collatedData[partyCode] + 1 || 1;
             }
 
-            for (var data in collatedData)
-                sortedArray.push([data, collatedData[data]])
+            for (var data in collatedData) {
+                sortedArray.push([data, collatedData[data]]);
+            }
 
-
-            sortedArray.sort(function(a, b) {return b[1] - a[1]});
+            sortedArray.sort(function (a, b) { return b[1] - a[1]; });
 
             return sortedArray;
+        },
+
+        generateShareUrl: function () {
+            return 'http://bbc.co.uk/#' + this.results.join('!');
+        },
+
+        addShareTools: function () {
+             new ShareTools('#manifesto-share-holder', {
+                storyPageUrl: this.generateShareUrl(),
+                header:       'Page header',
+                message:      'Message',
+                desc:         'Some text here',
+                hashtag:      'MyManifesto',
+                image:        'http://ichef.bbci.co.uk/news/640/media/images/81957000/png/_81957420_policies-promo.png',
+                template:     'dropdown'
+            }, 'manifesto-share');
         }
 
     };

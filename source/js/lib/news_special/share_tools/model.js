@@ -10,7 +10,7 @@
 
 /** @module nsshare-model */
 define(['lib/news_special/bootstrap'], function (news) {
-    var FACEBOOK_URL = 'https://www.facebook.com/dialog/feed',
+ var FACEBOOK_URL = 'https://www.facebook.com/dialog/feed',
         BBC_FB_APP_ID = '58567469885',
         BBC_SHARE_TOOLS_URL = 'http://www.bbc.co.uk/news/special/shared/vj_sharetools/fb_red_uri.html',
         // TODO collect location for WorldService
@@ -63,6 +63,7 @@ define(['lib/news_special/bootstrap'], function (news) {
         this.namespace = namespace;
         var opts = config || {};
 
+        this.baseUrl = opts.storyPageUrl || 'http://www.bbc.co.uk';
         this.storyPageUrl = opts.storyPageUrl || 'http://www.bbc.co.uk';
         if (opts.hashtag) {
             if (typeQuery(opts.hashtag, 'object')) {
@@ -350,6 +351,7 @@ define(['lib/news_special/bootstrap'], function (news) {
         '&description=' + this.getOGPDescription() + // Open Graph Protocol Description
         '&picture=' + this.getOGPImage(); // Open Graph Protocol Image
     },
+
     /**
     * Returns Twitter share request URL with appropriate callback
     * @public
@@ -360,7 +362,7 @@ define(['lib/news_special/bootstrap'], function (news) {
         return TWITTER_URL + // Twitter API
         '?text=' + this.getTwitterShareMessage() + // Custom share message
         ' ' + this.getHashTags() + // Hashtags string
-        ' ' + this.storyPageUrl; // URL storypage
+        ' ' + encodeURIComponent(this.storyPageUrl); // URL storypage
     },
 
 
@@ -388,6 +390,26 @@ define(['lib/news_special/bootstrap'], function (news) {
         }
     }
 
+
+    NSShareModel.prototype.getShortUrl = function (callback) {
+        var NSShareModel = this,
+            encodedURL = encodeURIComponent(NSShareModel.baseUrl + window.location.hash),
+            map = {
+                paths: {}
+            },
+            cacheName = encodedURL.replace(/[^A-Za-z]/g, '');
+
+        map['paths'][cacheName] = 'http://www.bbc.co.uk/modules/share/service/shrink?url=' +  encodedURL + '&appid=news&callback=define';
+        require(map, [cacheName], function (jsonp) {
+            if (typeof jsonp !== 'undefined') {
+                NSShareModel.storyPageUrl = jsonp['url'];
+            }
+            callback();
+        });
+        
+    }
+
     return NSShareModel;
+
 
 });

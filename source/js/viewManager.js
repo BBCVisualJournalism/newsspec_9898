@@ -6,11 +6,11 @@ define([
     'results'
 ], function (news, IssuesView, PoliciesView, ConfirmationView, ResultsView) {
 
-    function ViewManager() {
+    function ViewManager(options) {
         this.issueView = new IssuesView();
         this.policiesView = new PoliciesView();
         this.confirmationView = new ConfirmationView();
-        this.resultsView = new ResultsView();
+        this.resultsView = new ResultsView({partyNames: options.partyNames});
 
         this.issuesPage = $('.page__issues');
         this.policiesPage = $('.page__policies');

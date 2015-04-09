@@ -91,7 +91,23 @@ define([
             'tuv': 'ni',
             'uup': 'ni'
         },
-        nations = ['eng', 'ni', 'scot', 'cym'];
+        nations = ['eng', 'ni', 'scot', 'cym'],
+        partyNames = {
+            'con': 'Conservative',
+            'lab': 'Labour',
+            'ld': 'Liberal Democrats',
+            'ukip': 'UKIP',
+            'grn': 'Green',
+            'res': 'Respect',
+            'dup': 'Democratic Unionist Party',
+            'snp': 'SNP',
+            'sf': 'Sinn Fein',
+            'pc': 'Plaid Cymru',
+            'ap': 'Alliance Party',
+            'tuv': 'Traditional Unionist Voice',
+            'uup': 'Ulster Unionist Party',
+            'sdlp': 'SDLP'
+        };
 
 
     function listenForComponentStateChanges() {
@@ -141,12 +157,13 @@ define([
         addCollectionViewToApplication(options);
         listenForComponentStateChanges();
 
-        new ViewManager();
+        new ViewManager({partyNames: partyNames});
 
         news.sendMessageToremoveLoadingImage();
         $('.main').show();
 
-        //news.pubsub.emit('results:show', [["con-priorities-uk", "lab-immigration-uk", "lab-health-uk"]]);
+        news.pubsub.emit('results:show', [["con-priorities-uk", "lab-immigration-uk", "lab-health-uk"]]);
+
     }
 
     return {

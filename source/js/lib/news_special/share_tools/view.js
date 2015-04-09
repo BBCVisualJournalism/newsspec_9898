@@ -10,8 +10,8 @@
 */
 
 /** @module nsshare-view */
-define(['lib/news_special/bootstrap', 'lib/news_special/template_engine', 'lib/news_special/share_tools/html_template_default', 'lib/news_special/share_tools/html_template_dropdown'], function (news, templateEngine, htmlTemplateDefault, htmlTemplateDropdown) {
-
+define(['lib/news_special/bootstrap', 'lib/news_special/template_engine', 'lib/news_special/share_tools/html_template_default', 'lib/news_special/share_tools/html_template_dropdown'], function (news, TemplateEngine, htmlTemplateDefault, htmlTemplateDropdown) {
+   
     /**
     * Represents the DOM view of the personalised share module
     * @constructor
@@ -39,6 +39,7 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine', 'lib/n
         news.pubsub.on('ns:' + this.namespace + ':overlay:toggle',
             news.$.proxy(function (event) {
                 this.toggleOverlay(event.target);
+                news.pubsub.emit('istats', ['click', 'intention-to-share']);
             }, this)
         );
         news.pubsub.on('ns:' + this.namespace + ':overlay:close',
@@ -46,7 +47,7 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine', 'lib/n
                 this.closeOverlay(event.target);
             }, this)
         );
-    };
+    }
     /**
     * Builds the DOM elements for the share module
     * @public
@@ -56,38 +57,39 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine', 'lib/n
     * @param {object} model - contains the template variables
     * @throws DOMError If the DOM has already been rendered.
     */
+
     NSShareView.prototype.buildHtml = function (model) {
+        this.model = model;
         // Use JQuery simple templating...
         // This is easily extensible to allow different module for say googleplus
         // Use alternative dropdown template if present
-        var template = htmlTemplateDefault;
-
+        
+        var template = htmlTemplateDefault,
+            engine = new TemplateEngine();
+            
         if (model['_template']) {
             template = this.getTemplateDependencyName(model['_template']);
         }
         if (!this.viewReady) {
             //pass in the template key module.. We could deliver more than one template here if we wished ??
             this.elm.append(
-                templateEngine(template, {
+                engine.render(template, {
                     header : model.getHeader(),
                     networks : [
                         {
-                            target : 'email',
-                            share : model.emailShareTarget()
+                            target : 'email'
                         },
                         {
-                            target : 'facebook',
-                            share : model.fbShareTarget()
+                            target : 'facebook'
                         },
                         {
-                            target : 'twitter',
-                            share : model.twitterShareTarget()
+                            target : 'twitter'
                         }
                     ]
                 })
             );
             // attach events/
-            this.elm.on('click', '.share__tool',
+            this.elm.on('click', '.idt-share__tool',
                 news.$.proxy(this.requestShare, this));
 
             // inform controller
@@ -117,7 +119,7 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine', 'lib/n
     * @param {String} header - The Call to action, invitation to share text e.g. 'Share me'
     */
     NSShareView.prototype.updateHeader = function (header) {
-        news.$('#ns_share_module .share__title').html(header);
+        news.$('#ns_share_module .idt-share__title').html(header);
     };
     /**
     * Launches the popup window for sharing
@@ -146,7 +148,7 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine', 'lib/n
     * @method
     */
     NSShareView.prototype.toggleOverlay = function (element) {
-        this.elm.find('.share__overlay').toggle();
+        this.elm.find('.idt-share__overlay').toggle();
     };
     /**
     * Closes the overlay from the dropdown template
@@ -154,7 +156,7 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine', 'lib/n
     * @method
     */
     NSShareView.prototype.closeOverlay = function (element) {
-        this.elm.find('.share__overlay').toggle();
+        this.elm.find('.idt-share__overlay').toggle();
     };
 
     /**
@@ -167,14 +169,15 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine', 'lib/n
 
         ev.preventDefault();
         ev.stopPropagation();
+
         news.pubsub.emit('ns:' + this.namespace + ':share:call');
-        if (news.$(ev.currentTarget).hasClass('share__tool--email')) {
+        if (news.$(ev.currentTarget).hasClass('share__tool--email')  || news.$(ev.currentTarget).hasClass('idt-share__tool--email')) {
             news.pubsub.emit('ns:' + this.namespace + ':share:call:email');
-        } else if (news.$(ev.currentTarget).hasClass('share__tool--facebook')) {
+        } else if (news.$(ev.currentTarget).hasClass('share__tool--facebook') || news.$(ev.currentTarget).hasClass('idt-share__tool--facebook')) {
             news.pubsub.emit('ns:' + this.namespace + ':share:call:facebook');
-        } else if (news.$(ev.currentTarget).hasClass('share__tool--twitter')) {
+        } else if (news.$(ev.currentTarget).hasClass('share__tool--twitter') || news.$(ev.currentTarget).hasClass('idt-share__tool--twitter')) {
             news.pubsub.emit('ns:' + this.namespace + ':share:call:twitter');
-        } else { throw new Error('ValueError: Share application not of know type i.e facebook'); }
+        } else { throw new Error('ValueError: Share application not of known type i.e facebook'); }
     };
 
     NSShareView.prototype.destroy = function (ev) {
@@ -184,6 +187,7 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine', 'lib/n
         news.pubsub.off('ns:' + this.namespace + ':overlay:toggle');
         news.pubsub.off('ns:' + this.namespace + ':overlay:close');
     };
+
 
 
     return NSShareView;
