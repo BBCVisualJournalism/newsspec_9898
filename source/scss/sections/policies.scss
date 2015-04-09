@@ -44,7 +44,6 @@
 		.focused-card{
 			opacity: 1;
 			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-			margin-bottom: 50px;
 		}
 
 		.focused-card .guide-card__footer{
@@ -61,7 +60,7 @@
 		.policies__card-container--confirm__sec{
 			.issue-guide__cards--column-pri{
 				width: 0;
-				height: 50px;
+				max-height: 50px;
 				margin: 0;
 				border: 0;
 				padding: 0;
@@ -71,6 +70,12 @@
 			.issue-guide__cards--column-sec{
 				padding: 0;
 			}
+		}
+		.policies__card-container--confirm{
+			.focused-card{
+				margin-bottom: 50px;
+			}
+
 		}
 	}
 }

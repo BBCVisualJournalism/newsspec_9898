@@ -8,8 +8,8 @@ define([
         news.pubsub.on('popup:confirm:issue', $.proxy(this.confirmPolicy, this));
         news.pubsub.on('collection:view:resize', $.proxy(this.addFocus, this));
 
-        this.el.find('.js-slot').on('click', '#cancel-button', $.proxy(this.reset, this));
-        this.el.find('.js-slot').on('click', '#confirm-button', $.proxy(this.acceptPolicy, this));
+        this.el.on('click', '#cancel-button', $.proxy(this.reset, this));
+        this.el.on('click', '#confirm-button', $.proxy(this.acceptPolicy, this));
         news.pubsub.on('reset', $.proxy(this.reset, this));
         news.pubsub.on('issue:skipped', $.proxy(this.reset, this));
     };
@@ -18,7 +18,7 @@ define([
         confirmPolicy: function (policyId) {
             this.currentPolicyId = policyId;
 
-            var cardElm = this.el.find('#card-' + this.currentPolicyId),
+            var cardElm = this.getCardByPolicyId(policyId),
                 timeoutDelay = 400;
 
             this.el.addClass('policies__card-container--confirm');
@@ -33,13 +33,18 @@ define([
             setTimeout(function () {
                 $('.confirm-buttons').fadeIn(500);
             }, timeoutDelay);
+        },
 
-            
+        getCardByPolicyId: function (policyId) {
+            var containerString = this.el.find('#js-issue-collection-view-container').attr('class'),
+                selectedNationMatch = containerString.match(/issue-guide__filter-([a-z]*)/mi),
+                selectedNation = selectedNationMatch[1];
 
+            return this.el.find('.issue-guide__cards--collection--slot.js-slot-issue-' + selectedNation + ' #card-' + policyId);
         },
 
         focusCard: function () {
-            var cardElm = this.el.find('#card-' + this.currentPolicyId),
+            var cardElm = this.getCardByPolicyId(this.currentPolicyId),
                 confirmButtons = $('<div class="confirm-buttons"><button class="nav-button" id="confirm-button">Save and continue</button><button class="nav-button nav-button__white" id="cancel-button">Choose another policy</button></div>');
 
             cardElm.addClass('focused-card guide-card--expanded');

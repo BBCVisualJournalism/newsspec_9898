@@ -5,18 +5,6 @@
 }
 
 .nation-filter {
-    width: auto;
-    margin: 0;
-}
-
-@include respondMinMax(701px, false){
-  .nation-filter {
-    margin: 0 7%;
-  }
-}
-
-
-.nation-filter {
     background-color: #fff;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -93,6 +81,13 @@
 
     }
 }
+
+@include respondMinMax(701px, false){
+  .nation-filter {
+    margin: 0 7%;
+  }
+}
+
 
 
 
