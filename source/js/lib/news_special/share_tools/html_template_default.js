@@ -1,6 +1,6 @@
 define(function () {
     return '<div class="idt-share ns__share">' +
-                '<h2 class="idt-share__title"><&=header &></h2>' +
+                '<button class="nav-button"><&=header &></button>' +
                 '<ul class="idt-share__tools ">' +
                     '<& for ( var i = 0; i < networks.length; i++ ) { &>' + 
                         '<li class="idt-share__tool idt-share__tool--<&=networks[i].target &>">' +

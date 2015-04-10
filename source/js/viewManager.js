@@ -41,6 +41,8 @@ define([
             this.resultsPage.show();
 
             this.updateBreadcrumbs(2);
+
+            news.pubsub.emit('fetch:policy-cards', [chosenPolicies]);
         },
 
         updateBreadcrumbs: function (position) {

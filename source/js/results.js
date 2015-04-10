@@ -7,9 +7,12 @@ define([
     var Results = function (options) {
         this.partyNames = options.partyNames;
         this.el = $('.page__results');
+        this.cardsHolderPri = this.el.find('.results-collection-view-container--pri');
+        this.cardsHolderSec = this.el.find('.results-collection-view-container--sec');
         this.barChart = this.el.find('.bar-chart');
 
         news.pubsub.on('results:show', $.proxy(this.showResults, this));
+        news.pubsub.on('fetch:policy-cards:complete', $.proxy(this.displaysCards, this));
     };
 
     Results.prototype = {
@@ -21,6 +24,17 @@ define([
             this.addShareTools();
         },
 
+        displaysCards: function (cards) {
+            var Results = this,
+                count = 0;
+
+            $.each(cards, function (policyId, card) {
+                var cardHolder = (count % 2 === 0) ? Results.cardsHolderPri : Results.cardsHolderSec;
+                cardHolder.append(card);
+                count++;
+            });
+        },
+ 
         drawChart: function () {
             var orderedData = this.chartCollateData(),
                 barTemplateHtml = this.el.find('#bar-chart-bar-html').html(),
@@ -95,7 +109,7 @@ define([
         addShareTools: function () {
              new ShareTools('#manifesto-share-holder', {
                 storyPageUrl: this.generateShareUrl(),
-                header:       'Page header',
+                header:       'Share your manifesto',
                 message:      'Message',
                 desc:         'Some text here',
                 hashtag:      'MyManifesto',

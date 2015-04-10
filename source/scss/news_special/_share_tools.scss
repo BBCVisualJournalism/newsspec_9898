@@ -159,8 +159,6 @@
     }
 
     .idt-share__button {
-        max-width: 185px;
-        height: 40px;
         cursor: pointer;
 
         .idt-share__png_icon {
@@ -192,7 +190,7 @@
         font-size:14px;
         margin:0;
         padding:0 0 10px 0;
-        top: 0;
+        top: 50px;
         left: 0;
         color:#525252;
         width:auto;

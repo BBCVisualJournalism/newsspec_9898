@@ -161,9 +161,6 @@ define([
 
         news.sendMessageToremoveLoadingImage();
         $('.main').show();
-
-        news.pubsub.emit('results:show', [["con-priorities-uk", "lab-immigration-uk", "lab-health-uk"]]);
-
     }
 
     return {

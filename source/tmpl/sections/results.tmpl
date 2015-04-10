@@ -4,16 +4,29 @@
     <p>Here are the parties you most agreed with. Depending on how you chose, you might get a surprise!</p>
 
     <ol class="bar-chart"></ol>
-
-    <h4>Your manifesto link</h4>
-    <div id="manifesto-share-holder"></div>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
 	<script type="text/html" id="bar-chart-bar-html">
         <li>
             <div class="bar-chart--bar bar-chart--bar-party__<&= partyCode &>"></div>
             <span class="bar-chart--label"><&= partyName &> <strong><&= count &></strong></span>
         </li>
 	</script>
+
+
+    <h4 class="share-heading">Share your manifesto</h4>
+    <div id="manifesto-share-holder"></div>
+   
+   	<hr/>
+
+   	<h4>Your policies</h4>
+    <p>Here are the policies you chose to make up your manifesto:</p>
+
+	<div class="policies__card-container">
+		<div id="results-collection-view-container" class='collection-view-container'>
+			<div class="results-collection-view-container--inner">
+				<div class="results-collection-view-container--pri"></div>
+				<div class="results-collection-view-container--sec"></div>
+			</div>
+		</div>
+	</div>
 
 </div>
