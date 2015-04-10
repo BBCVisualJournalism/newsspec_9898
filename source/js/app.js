@@ -151,6 +151,23 @@ define([
         });
     }
 
+    function recoverFromSharedState() {
+        var stateHash = window.location.hash;
+        if (stateHash) {
+            var safeHash = makeStateSafe(stateHash),
+                policyCards = safeHash.split('!');
+            if (policyCards.length > 0) {
+                news.pubsub.emit('results:load-from:share', [policyCards]);
+            }
+        }
+    }
+
+    function makeStateSafe(stateCode) {
+        /* Removes all characters that aren't a-z, ! or - */
+        /* This should prevent attacks. */
+        return stateCode.replace(/([^a-z\-!])/gi, '');
+    }
+
     function init(options) {
 
         addNationFilterToApplication();
@@ -161,6 +178,8 @@ define([
 
         news.sendMessageToremoveLoadingImage();
         $('.main').show();
+
+        recoverFromSharedState();
     }
 
     return {

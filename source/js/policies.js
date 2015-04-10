@@ -9,6 +9,7 @@ define([
         this.policyCountText = this.el.find('#policy-count-text');
         this.issuesEl = $('.page__issues');
         this.policyHeaderText = this.el.find('#policy-header--name');
+        this.policyHeaderIcon = this.el.find('#policy-icon');
         this.policyBreadcrumbText = this.el.find('#policy-name-text');
 
         this.el.find('.start-again').on('click', this.startAgain);
@@ -32,6 +33,7 @@ define([
             if (this.policyPosition < this.userPolicies.length) {
                 var policyKey = this.userPolicies[this.policyPosition];
                 this.setPolicyHeaderText(policyKey);
+                console.log(policyKey);
                 news.pubsub.emit('collection:view:show-policy', policyKey);
                 this.updatePolicyBreadcrumbs();
 
@@ -58,6 +60,7 @@ define([
 
             this.policyHeaderText.text(policyText);
             this.policyBreadcrumbText.text(policyText);
+            this.policyHeaderIcon.attr('class', 'icon icon__' + policyKey);
         },
 
         updatePolicyBreadcrumbs: function () {

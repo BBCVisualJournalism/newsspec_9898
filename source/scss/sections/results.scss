@@ -1,6 +1,6 @@
 .page__results{
 	display: none;
-	
+
 	.bar-chart{
 		max-width: 550px;
 		list-style: none;
@@ -8,7 +8,7 @@
 		margin: 0;
 
 		li{
-			margin-top: 16px;
+			margin-top: 12px;
 		}
 
 		.bar-chart--bar{
@@ -19,7 +19,7 @@
 
 		.bar-chart--label{
 			display: inline-block;
-			padding-top: 3px;
+			padding-top: 2px;
 			font: 16px Helvetica;
 		}
 
@@ -50,7 +50,7 @@
 	}
 
 	.policies__card-container {
-	    padding: 0 0 1px 0;
+	    padding: 0 0 16px 0;
 	}
 
 	.guide-card{
@@ -69,16 +69,9 @@
 	    width: auto;
 	}
 
-	.results-collection-view-container--pri .guide-card{
-		margin-right: -8px;
-	}
-
-	.results-collection-view-container--sec .guide-card{
-		margin-left: -8px;
-	}
-
 	.policies__card-container {
-	    min-height: initial
+	    min-height: initial;
+	    overflow: hidden;
 	}
 
 	@include respondMinMax(701px, false){
@@ -90,10 +83,82 @@
 				float: left;
 				width: 50%;
 	    	}
+
+	  		.results-collection-view-container--pri .guide-card{
+				margin-right: -8px;
+			}
+			.results-collection-view-container--sec .guide-card{
+				margin-left: -8px;
+			}
 		}
+
+		.policies__card-container {
+			padding: 0 0 1px 0;
+		}
+
+
 	}
 
 	.share-heading{
 		margin-top: 15px;
 	}
+
+	.issues-desc{
+		max-width: initial;
+	}
+	.issues-link{
+		font: bold 14px Helvetica;
+		color: #000;
+		text-decoration: none;
+
+		&:hover{
+			color: #0d63aa;
+		}
+	}
+
+	&.page__results__shared{
+		.share-heading, .manifesto-share-holder{
+			display: none;
+		}
+
+		.make-own-manifesto{
+			display: inline-block;
+		}
+
+		.results-sub-heading{
+			margin-top: 25px;
+		}
+	
+
+	}
 }
+
+.make-own-manifesto{
+	display: none;
+	width: 100%;
+	background-color: #EDEDED;
+	padding: 10px;
+	
+
+	.nav-button{
+		display: block;
+		margin-top: 8px;
+	}
+
+	&.make-own-manifesto__top-margin{
+		margin-top: 16px;
+	}
+}
+
+@include respondMinMax(580px, false){
+	.make-own-manifesto{
+		padding: 0 0 0 10px;
+		width: initial;
+
+		.nav-button{
+			margin: 0 0 0 10px;
+			display: inline-block;
+		}
+	}
+}
+

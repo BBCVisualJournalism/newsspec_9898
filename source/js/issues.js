@@ -8,6 +8,7 @@ define([
 		this.submitButton = $('.nav-buttons #choose-policy');
 
 		/* LISTENERS */
+		news.pubsub.on('reset', $.proxy(this.reset, this));
 		this.issues.on('click', this.issueClicked);
 		this.submitButton.on('click', $.proxy(this.submit, this));
 	}
@@ -24,7 +25,12 @@ define([
 			this.issues.filter('.issue__checked').each(function () {
 				selectedOptions.push($(this).data('issue'));
 			});
+			console.log(selectedOptions);
 			news.pubsub.emit('policies:chosen', [selectedOptions]);
+		},
+
+		reset: function () {
+			this.elm.find('.issue__checked').removeClass('issue__checked');
 		}
 
 	};

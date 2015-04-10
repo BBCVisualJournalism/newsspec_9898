@@ -13,19 +13,33 @@ define([
         this.barChart = this.el.find('.bar-chart');
 
         news.pubsub.on('results:show', $.proxy(this.showResults, this));
+        news.pubsub.on('results:load-from:share', $.proxy(this.loadFromShare, this));
         news.pubsub.on('fetch:policy-cards:complete', $.proxy(this.displaysCards, this));
+        this.el.find('.make-own-button').on('click', this.reset);
     };
 
     Results.prototype = {
 
-        showResults: function (results) {
+        showResults: function (results, isShared) {
             this.results = results;
+            this.el.removeClass('page__results__shared');
+
+            news.pubsub.emit('fetch:policy-cards', [results]);
 
             this.drawChart();
             this.addShareTools();
+
+            this.toggleShareView(isShared === true);
+        },
+
+        loadFromShare: function (cards) {
+            this.showResults(cards, true);
         },
 
         displaysCards: function (cards) {
+            this.cardsHolderPri.empty();
+            this.cardsHolderSec.empty();
+            
             for (var i = 0; i < this.results.length; i++) {
                 var card = cards[this.results[i]],
                     cardHolder = (i % 2 === 0) ? this.cardsHolderPri : this.cardsHolderSec;
@@ -34,6 +48,22 @@ define([
             }
         },
  
+        toggleShareView: function (isShared) {
+            var dataValue;
+            if (isShared) {
+                this.el.addClass('page__results__shared');
+                dataValue = 'sharedText';
+            } else {
+                this.el.removeClass('page__results__shared');
+                dataValue = 'selfText';
+            }
+
+            this.el.find('[data-self-text]').each(function () {
+                var html = $(this).data(dataValue);
+                $(this).text(html);
+            });
+        },
+
         drawChart: function () {
             var orderedData = this.chartCollateData(),
                 barTemplateHtml = this.el.find('#bar-chart-bar-html').html(),
@@ -58,7 +88,6 @@ define([
             setTimeout(function () {
                 _this.sizeBars(_this, orderedData);
             }, 0);
-
         },
 
         sizeBars: function (_this, orderedData) {
@@ -77,8 +106,6 @@ define([
                 var sizeDiff = largestTotal / orderedData[index][1];
                 $(this).css('width', 'calc((100% - ' + (maxWidth + 15) + 'px) / ' + sizeDiff + ')');
             });
-
-
         },
 
         chartCollateData: function () {
@@ -95,7 +122,6 @@ define([
             for (var data in collatedData) {
                 sortedArray.push([data, collatedData[data]]);
             }
-
             sortedArray.sort(function (a, b) { return b[1] - a[1]; });
 
             return sortedArray;
@@ -106,15 +132,19 @@ define([
         },
 
         addShareTools: function () {
-             new ShareTools('#manifesto-share-holder', {
+            new ShareTools('#manifesto-share-holder', {
                 storyPageUrl: this.generateShareUrl(),
-                header:       'Share your manifesto',
-                message:      'Message',
-                desc:         'Some text here',
-                hashtag:      'MyManifesto',
-                image:        'http://ichef.bbci.co.uk/news/640/media/images/81957000/png/_81957420_policies-promo.png',
-                template:     'dropdown'
+                header: 'Share your manifesto',
+                message: 'Message',
+                desc: 'Some text here',
+                hashtag: 'MyManifesto',
+                image: 'http://ichef.bbci.co.uk/news/640/media/images/81957000/png/_81957420_policies-promo.png',
+                template: 'dropdown'
             }, 'manifesto-share');
+        },
+
+        reset: function () {
+            news.pubsub.emit('reset');
         }
 
     };

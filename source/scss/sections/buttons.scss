@@ -49,8 +49,8 @@
 }
 
 .nav-button {
-	height: 41px;
-	padding: 10px 12px;
+	height: 34px;
+	padding: 8px 12px;
 	outline: 0;
 	border: 0;
 	background-color: #007f7f;
@@ -96,4 +96,6 @@
 .nav-button.nav-button__share{
 	background-color: #499343;
 	font-weight: normal;
+	padding: 8px 12px;
+	height: initial;
 }

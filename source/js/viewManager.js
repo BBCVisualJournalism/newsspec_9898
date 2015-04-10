@@ -19,6 +19,7 @@ define([
         /* LISTENERS */
         news.pubsub.on('policies:chosen', $.proxy(this.policiesChosen, this));
         news.pubsub.on('results:show', $.proxy(this.showResults, this));
+        news.pubsub.on('results:load-from:share', $.proxy(this.showResults, this));
         news.pubsub.on('reset', $.proxy(this.reset, this));
     }
 
@@ -41,8 +42,6 @@ define([
             this.resultsPage.show();
 
             this.updateBreadcrumbs(2);
-
-            news.pubsub.emit('fetch:policy-cards', [chosenPolicies]);
         },
 
         updateBreadcrumbs: function (position) {
