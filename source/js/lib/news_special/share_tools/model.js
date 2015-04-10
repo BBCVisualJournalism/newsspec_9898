@@ -61,6 +61,7 @@ define(['lib/news_special/bootstrap'], function (news) {
     */
     var NSShareModel = function (config, namespace) {
         this.namespace = namespace;
+        this.shortnerCache = {};
         var opts = config || {};
 
         this.baseUrl = opts.storyPageUrl || 'http://www.bbc.co.uk';
@@ -393,20 +394,22 @@ define(['lib/news_special/bootstrap'], function (news) {
 
     NSShareModel.prototype.getShortUrl = function (callback) {
         var NSShareModel = this,
-            encodedURL = encodeURIComponent(NSShareModel.baseUrl + window.location.hash),
+            encodedURL = encodeURIComponent(NSShareModel.baseUrl),
             map = {
                 paths: {}
             },
             cacheName = encodedURL.replace(/[^A-Za-z]/g, '');
 
-        map['paths'][cacheName] = 'http://www.bbc.co.uk/modules/share/service/shrink?url=' +  encodedURL + '&appid=news&callback=define';
-        require(map, [cacheName], function (jsonp) {
-            if (typeof jsonp !== 'undefined') {
-                NSShareModel.storyPageUrl = jsonp['url'];
-            }
+        if (NSShareModel.shortnerCache[cacheName]) {
+            NSShareModel.storyPageUrl =  NSShareModel.shortnerCache[cacheName];
             callback();
-        });
-        
+        } else {
+            $.get('http://www.bbc.co.uk/modules/share/service/shrink?url=' +  encodedURL, function(data) {
+                NSShareModel.storyPageUrl = data.url;
+                NSShareModel.shortnerCache[cacheName] = data.url;
+                callback();
+            });
+        }
     }
 
     return NSShareModel;

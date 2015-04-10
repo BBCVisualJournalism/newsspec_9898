@@ -77,6 +77,10 @@
 		margin-left: -8px;
 	}
 
+	.policies__card-container {
+	    min-height: initial
+	}
+
 	@include respondMinMax(701px, false){
 		.results-collection-view-container--inner{
 			overflow: hidden;

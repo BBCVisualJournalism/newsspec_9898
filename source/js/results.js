@@ -5,6 +5,7 @@ define([
 ], function (news, TemplateEngine, ShareTools) {
 
     var Results = function (options) {
+        this.results = [];
         this.partyNames = options.partyNames;
         this.el = $('.page__results');
         this.cardsHolderPri = this.el.find('.results-collection-view-container--pri');
@@ -25,14 +26,12 @@ define([
         },
 
         displaysCards: function (cards) {
-            var Results = this,
-                count = 0;
+            for (var i = 0; i < this.results.length; i++) {
+                var card = cards[this.results[i]],
+                    cardHolder = (i % 2 === 0) ? this.cardsHolderPri : this.cardsHolderSec;
 
-            $.each(cards, function (policyId, card) {
-                var cardHolder = (count % 2 === 0) ? Results.cardsHolderPri : Results.cardsHolderSec;
                 cardHolder.append(card);
-                count++;
-            });
+            }
         },
  
         drawChart: function () {
