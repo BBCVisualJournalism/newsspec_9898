@@ -128,7 +128,7 @@ define([
         },
 
         generateShareUrl: function () {
-            return 'http://bbc.co.uk/#' + this.results.join('!');
+            return document.referrer + '#' + this.results.join('!');
         },
 
         addShareTools: function () {
@@ -145,6 +145,7 @@ define([
 
         reset: function () {
             news.pubsub.emit('reset');
+            news.pubsub.emit('ns:sharetools:destroyAll');
         }
 
     };
