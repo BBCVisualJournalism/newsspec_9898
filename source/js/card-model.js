@@ -83,8 +83,14 @@ define(['lib/news_special/bootstrap'], function (news) {
             this.isCachePopulated(cards, promiseCount);
 
             for (var i = cards.length - 1; i >= 0; i--) {
-                var currentIssue = cards[i].split('-')[1];
-                this.fetchHtml('/indepthtoolkit/issues-guide/issues/' + currentIssue + '/policies', 'internal');
+                var currentIssue = cards[i].split('-')[1],
+                    endpoint = '/indepthtoolkit/issues-guide/issues/' + currentIssue + '/policies';
+                if (typeof cache[endpoint] !== 'undefined') {
+                    news.pubsub.emit('model:card:request:internal', [cache[endpoint]]);
+                } else {
+                    this.fetchHtml(endpoint, 'internal');
+                }
+                
             }
         },
 
