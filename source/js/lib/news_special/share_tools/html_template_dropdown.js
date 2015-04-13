@@ -1,7 +1,7 @@
 define(function () {
 	return '<div class="idt-share ns__share-dropdown">' +
                 '<div class="idt-share__button">' +
-					'<button class="nav-button nav-button__share"><span class="share-icon"></span> <&=header &></button>' +
+					'<button class="nav-button nav-button__share icon__share"><&=header &></button>' +
 				'</div>' +
 		  	  	'<span class="idt-share__overlay">' +
 			  	  	'<p><&= header &></p>' +

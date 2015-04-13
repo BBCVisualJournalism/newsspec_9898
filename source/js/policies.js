@@ -13,7 +13,7 @@ define([
         this.policyBreadcrumbText = this.el.find('#policy-name-text');
 
         this.el.find('.start-again').on('click', this.startAgain);
-        this.el.find('#skip-policy').on('click', $.proxy(this.skipPolicy, this));
+        this.el.find('.skip-policy').on('click', $.proxy(this.skipPolicy, this));
 
         news.pubsub.on('policy:confirmed', $.proxy(this.processPolicy, this));
     };
