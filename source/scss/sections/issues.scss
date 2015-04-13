@@ -1,4 +1,16 @@
 .page__issues{
+
+	.nav-button.choose-policy{
+		opacity: 0.4;
+		pointer: default;
+		pointer-events: none;
+
+		&.nav-button__active{
+			opacity: initial;
+			pointer: initial;
+			pointer-events: initial;
+		}
+	}
 	
 	.issues{
 		margin: 16px 0 0 0;

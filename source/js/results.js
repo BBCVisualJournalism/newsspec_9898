@@ -146,6 +146,7 @@ define([
         reset: function () {
             news.pubsub.emit('reset');
             news.pubsub.emit('ns:sharetools:destroyAll');
+            $('#manifesto-share-holder').empty();
         }
 
     };

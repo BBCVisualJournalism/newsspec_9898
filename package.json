@@ -5,7 +5,7 @@
     "url": "http://github.com/BBCVisualJournalism/newsspec_9898"
   },
   "description":    "My manifesto - Election 2015",
-  "version":        "0.1.153",
+  "version":        "0.1.156",
   "devDependencies": {
     "casperjs":                         "1.1.0-beta3",
     "grunt":                            "~0.4.0",
@@ -16,7 +16,7 @@
     "grunt-contrib-connect":            "~0.5.0",
     "grunt-concurrent":                 "~0.4.3",
     "grunt-contrib-copy":               "~0.4.1",
-    "grunt-contrib-csslint":            "~0.2.0",
+    "grunt-contrib-csslint":            "~0.4.0",
     "grunt-contrib-cssmin":             "0.9.0",
     "grunt-contrib-imagemin":           "~0.3.0",
     "grunt-contrib-jasmine":            "~0.5.x",

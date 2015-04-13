@@ -12,6 +12,7 @@ define(['jquery'], function ($) {
                 externalHostCommunicator.setHeight();
                 externalHostCommunicator.registerIstatsCall(actionType, actionName, viewLabel);
             });
+            $.on('window:scrollTo', this.sendScrollToHost);
         },
         height: 0,
         registerIstatsCall: function (actionType, actionName, viewLabel) {
@@ -75,6 +76,16 @@ define(['jquery'], function ($) {
             if (this.postMessageAvailable) {
                 window.parent.postMessage(window.location.pathname + '::' + JSON.stringify(message), '*');
             }
+        },
+        sendScrollToHost: function (scrollPosition, scrollDuration) {
+            var talker_uid = window.location.pathname,
+            message = {
+                scrollPosition: scrollPosition,
+                scrollDuration: scrollDuration,
+                hostPageCallback: false
+            };
+            window.parent.postMessage(talker_uid + '::' + JSON.stringify(message), '*');
+
         },
         getValueFromQueryString: function (name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');

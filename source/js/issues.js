@@ -9,7 +9,7 @@ define([
 
 		/* LISTENERS */
 		news.pubsub.on('reset', $.proxy(this.reset, this));
-		this.issues.on('click', this.issueClicked);
+		this.issues.on('click', $.proxy(this.issueClicked, this));
 		this.submitButton.on('click', $.proxy(this.submit, this));
 	}
 
@@ -18,6 +18,12 @@ define([
 		issueClicked: function (event) {
 			var issueElm = $(event.currentTarget || event.srcElement);
 			issueElm.toggleClass('issue__checked');
+
+			if (this.issues.filter('.issue__checked').length > 0) {
+				this.submitButton.addClass('nav-button__active');
+			} else {
+				this.submitButton.removeClass('nav-button__active');
+			}
 		},
 
 		submit: function () {
@@ -25,8 +31,9 @@ define([
 			this.issues.filter('.issue__checked').each(function () {
 				selectedOptions.push($(this).data('issue'));
 			});
-			console.log(selectedOptions);
-			news.pubsub.emit('policies:chosen', [selectedOptions]);
+			if (selectedOptions.length > 0) {
+				news.pubsub.emit('policies:chosen', [selectedOptions]);
+			}
 		},
 
 		reset: function () {

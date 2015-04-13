@@ -41,6 +41,7 @@ define([
             } else {
                 news.pubsub.emit('results:show', [this.selectedPolicies]);
             }
+            news.pubsub.emit('window:scrollTo', [0, 0]);
         },
 
         setupPolicyBreadcrumbs: function () {

@@ -132,6 +132,20 @@
                     this.getObjectNotationFromDataString(data)
                 );
                 this.processIStatsInstructions(this.data);
+                this.processScrollInstuctions(this.data);
+
+
+            }
+        },
+
+        processScrollInstuctions: function (scrollData) {
+            /* Check we have scroll data. */
+            if ((typeof(scrollData.scrollPosition) !== 'undefined')) {
+                if (scrollData.scrollDuration <= 0) {
+                    this.scrollToInstant(scrollData.scrollPosition);
+                } else {
+                    this.scrollToAnimated(scrollData.scrollPosition, scrollData.scrollDuration);
+                }
             }
         },
 
@@ -184,6 +198,44 @@
             else {
                 return window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
             }
+        },
+
+        getScrollY: function () {
+            return window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop || 0;
+        },
+
+        scrollToInstant: function (iframeScrollPosition) {
+            var scrollPosition = this.elm.getBoundingClientRect().top + this.getScrollY() + iframeScrollPosition;
+            window.scrollTo(0, scrollPosition);
+        },
+
+        scrollToAnimated: function (iframeScrollPosition, scrollDuration) {
+            var self = this;
+
+            var startScrollY = this.getScrollY(),
+                scrollPosition = this.elm.getBoundingClientRect().top + startScrollY + iframeScrollPosition;
+
+            var scrollStep = Math.ceil((scrollPosition - startScrollY) / (scrollDuration / 15));
+
+            /* Timeout to cancel if something wierd happens  - prevent infinite loops */
+            var timeout = false;
+            setTimeout(function () { timeout = true; }, scrollDuration * 5);
+
+            var count = 0;
+
+            var scrollInterval = setInterval(function () {
+                var scrollY = self.getScrollY();
+                if ((
+                    (scrollStep >= 0 && scrollY <= scrollPosition) ||
+                    (scrollStep < 0 && scrollY > scrollPosition)
+                ) && !timeout) {
+                    count++;
+                    window.scrollTo(0, startScrollY + (scrollStep * count));
+                } else {
+                    window.scrollTo(0, scrollPosition);
+                    clearInterval(scrollInterval);
+                }
+            }, 15);
         },
 
         removeAppWebViewLinksFromHostPage: function () {
