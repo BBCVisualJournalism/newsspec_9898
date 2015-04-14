@@ -69,7 +69,9 @@ define([
                 timeoutDelay = 600;
             }
 
-            this.focusCardAddedElm.remove();
+            if (this.focusCardAddedElm) {
+                this.focusCardAddedElm.remove();
+            }
         
             setTimeout(function () {
                 Confirmation.el.removeClass('policies__card-container--confirm');

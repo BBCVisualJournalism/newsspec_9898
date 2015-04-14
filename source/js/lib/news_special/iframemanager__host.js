@@ -339,13 +339,16 @@
                 document.implementation.hasFeature('http://www.w3.org/TR/SVG11/feature#BasicStructure', '1.1') &&
                 'querySelector' in document &&
                 'localStorage' in window &&
-                'addEventListener' in window,
-            atLeastIE8   = !!(document.documentMode && (document.documentMode >= 8));
+                'addEventListener' in window;
 
-        return modernDevice || atLeastIE8;
+        return modernDevice;
     }
 
     if (cutsTheMustard()) {
+        var nonJsMessage = document.querySelector('#newsspec-9898--non-js-message');
+        if (nonJsMessage) {
+            nonJsMessage.style.display = 'none';
+        }
         var iframe = new IframeWatcher();
     }
 

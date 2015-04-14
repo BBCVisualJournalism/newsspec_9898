@@ -62,22 +62,15 @@
         cursor: pointer;
       }
 
-      
-      .nation-filter__countries--item.nation-filter__countries--item--active:hover, 
-      .nation-filter__countries--item.nation-filter__countries--item--active:active,
       .nation-filter__countries--item.nation-filter__countries--item--active {
         border-bottom-color: #c00;
       }
 
-
-      .nation-filter__countries--item.nation-filter__countries--item--notrequired,
-      .nation-filter__countries--item.nation-filter__countries--item--notrequired:active,
-      .nation-filter__countries--item.nation-filter__countries--item--notrequired:hover {
+      .nation-filter__countries--item.nation-filter__countries--item--notrequired {
         color: #ededed;
         cursor: default;
         border-bottom-color: #fff;
       }
-
 
     }
 }

@@ -33,6 +33,7 @@ define([
         },
 
         loadFromShare: function (cards) {
+            $('.breadcrumbs--to-hide').hide();
             this.showResults(cards, true);
         },
 
@@ -147,6 +148,7 @@ define([
             news.pubsub.emit('reset');
             news.pubsub.emit('ns:sharetools:destroyAll');
             $('#manifesto-share-holder').empty();
+            $('.breadcrumbs--to-hide').show();
         }
 
     };
