@@ -5,9 +5,10 @@ define([
     var Confirmation = function () {
         this.currentPolicyId = '';
         this.el = $('.policies__card-container');
+        this.focusCardMarkup = $('#focused-card-tmpl').html();
+
         news.pubsub.on('popup:confirm:issue', $.proxy(this.confirmPolicy, this));
         news.pubsub.on('collection:view:resize', $.proxy(this.addFocus, this));
-
         this.el.on('click', '#cancel-button', $.proxy(this.reset, this));
         this.el.on('click', '#confirm-button', $.proxy(this.acceptPolicy, this));
         news.pubsub.on('reset', $.proxy(this.reset, this));
@@ -16,10 +17,11 @@ define([
 
     Confirmation.prototype = {
         confirmPolicy: function (policyId) {
-            this.currentPolicyId = policyId;
-
             var cardElm = this.getCardByPolicyId(policyId),
-                timeoutDelay = 400;
+                timeoutDelay = 400,
+                confirmation = this;
+
+            this.currentPolicyId = policyId;
 
             this.el.addClass('policies__card-container--confirm');
 
@@ -31,7 +33,7 @@ define([
             this.focusCard();
 
             setTimeout(function () {
-                $('.confirm-buttons').fadeIn(500);
+                confirmation.focusCardAddedElm.fadeIn(500);
             }, timeoutDelay);
         },
 
@@ -44,23 +46,22 @@ define([
         },
 
         focusCard: function () {
-            var cardElm = this.getCardByPolicyId(this.currentPolicyId),
-                confirmButtons = $('<div class="confirm-buttons"><button class="nav-button" id="confirm-button">Save and continue</button><button class="nav-button nav-button__white" id="cancel-button">Choose another policy</button></div>');
+            var cardElm = this.getCardByPolicyId(this.currentPolicyId);
+
+            this.focusCardAddedElm = $(this.focusCardMarkup);
 
             cardElm.addClass('focused-card guide-card--expanded');
-            cardElm.parent().append(confirmButtons);
+            cardElm.parent().append(this.focusCardAddedElm);
         },
 
         addFocus: function () {
             this.focusCard();
-            $('.confirm-buttons').show();
+            this.focusCardAddedElm.show();
         },
 
         reset: function () {
             var Confirmation = this,
-            timeoutDelay = 0,
-            confirmButtons = $('.confirm-buttons');
-
+            timeoutDelay = 0;
 
 
             if ($('.policies__card-container--confirm__sec').length > 0) {
@@ -68,7 +69,7 @@ define([
                 timeoutDelay = 600;
             }
 
-            confirmButtons.remove();
+            this.focusCardAddedElm.remove();
         
             setTimeout(function () {
                 Confirmation.el.removeClass('policies__card-container--confirm');

@@ -78,6 +78,10 @@
 		background-position: left center;
 		padding-left: 38px;
 	}
+
+	&:hover{
+		background-color: #006767;
+	}
 }
 
 .nav-button.nav-button__white{
@@ -85,8 +89,16 @@
 	margin-top: 10px;
 	background-color: initial;
 	border: 2px solid #fff;
+
+	&:hover{
+		background-color: #007f7f;
+	}
 }
 .nav-button.nav-button__share{
 	background-color: #499343;
 	font-weight: normal;
+
+	&:hover{
+		background-color: #6bbd45;
+	}
 }

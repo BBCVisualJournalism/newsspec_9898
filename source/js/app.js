@@ -184,7 +184,7 @@ define([
                         }
                     }
                 }
-            }catch(e) {
+            }catch (e) {
             }
         }
     }

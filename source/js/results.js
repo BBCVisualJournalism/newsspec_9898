@@ -44,7 +44,7 @@ define([
                 var card = cards[this.results[i]],
                     cardHolder = (i % 2 === 0) ? this.cardsHolderPri : this.cardsHolderSec;
 
-                cardHolder.append(card);
+                cardHolder.append(card.cloneNode(true));
             }
         },
  
@@ -137,7 +137,7 @@ define([
                 header: 'Share your manifesto',
                 message: 'Message',
                 desc: 'Some text here',
-                hashtag: 'MyManifesto',
+                hashtag: 'GE2015',
                 image: 'http://ichef.bbci.co.uk/news/640/media/images/81957000/png/_81957420_policies-promo.png',
                 template: 'dropdown'
             }, 'manifesto-share');

@@ -20,7 +20,7 @@ $backgroundColor: #ededed;
 
 .policies__card-container {
     transition: background-color 0.6s;
-    margin-top: 0.5em;
+    margin-top: 1em;
     padding-top: 1em;
     min-height: 500px;
     background: $backgroundColor;
@@ -29,7 +29,7 @@ $backgroundColor: #ededed;
 
 .issue-guide__cards--collection--one-column {
     .guide-card--policy {
-        margin-bottom: 8px;
+        margin-bottom: 4px;
     }
 }
 
@@ -41,6 +41,10 @@ $backgroundColor: #ededed;
 @include respondMinMax(701px, false){
     .issue-guide__cards--collection{
         margin: 1em 7%;
+    }
+
+    .issue-guide__cards--collection--one-column .guide-card--policy {
+        margin-bottom: 1em;
     }
 }
 

@@ -33,7 +33,6 @@ define([
             if (this.policyPosition < this.userPolicies.length) {
                 var policyKey = this.userPolicies[this.policyPosition];
                 this.setPolicyHeaderText(policyKey);
-                console.log(policyKey);
                 news.pubsub.emit('collection:view:show-policy', policyKey);
                 this.updatePolicyBreadcrumbs();
 

@@ -9,5 +9,5 @@ module.exports = function (grunt) {
         }
     });
     
-    grunt.registerTask('css', ['clean:sasscache', 'sass:main', 'sass:inline', 'csslint', 'cssmin']);
+    grunt.registerTask('css', ['clean:sasscache', 'sass:main', 'sass:inline', 'cssmin']);
 };

@@ -231,7 +231,7 @@ p.guide-card__note-policy {
 	background-color: transparent;
 	background-repeat: no-repeat;
 	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAJ1BMVEUAAAAAf38Af38Af38Af38Af38Af38Af38Af38Af38Af38Af38Af3++ym5LAAAADHRSTlMAwJAw8OCAYFBAEKDtaJ7+AAAAlklEQVQoz2MYYoBZ8cwZIQM0MZkzQHAQVTTnTFDnDNUzx5DFuM+4g6iSMxuQFR5cAKK4ZJCUMp8RYGDgOcDAwHgGYSrjkQUQQS4fAbigzXEGiCBDzWG4oE4ATJD1EFxQRgEmyHQQLnimASbIcQYhOIHnDBgc4CQgiKkd0yJMJ+F1PKY3MQMEM+gIBDIiOghFHCKKhxYAAMDrTn/RGpXAAAAAAElFTkSuQmCC');
-	background-position: $baseline center;
+	background-position: 8px center;
 	border-top: 1px solid $borderColor;
 	color: #007f7f;
 	width: auto;
@@ -239,10 +239,9 @@ p.guide-card__note-policy {
 	font-size: 0.875em;
 	line-height: 1.143em;
 	font-weight: bold;
-	padding: 1.143em $gutter 0.857em $gutter;
+	padding: 1.143em $gutter 0.857em 50px;
 	display: block;
 	min-height: $baseline * 3;
-	padding-left: $baseline * 4;
 	overflow: hidden;
 }
 
@@ -853,7 +852,7 @@ p.guide-card__note-policy {
 .issue-guide__cards--collection--party {
 
 	.guide-card--expanded {
-
+		margin-bottom: 4px;
 		 
 		.guide-card__issue:after,
 		.guide-card__party:after {
