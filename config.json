@@ -1,6 +1,6 @@
 {
   "debug":          "false",
-  "whichEnv":       "local",
+  "whichEnv":       "live",
   "scaffoldLite":   "false",
   "project_number": "9898",
   "year":           "2015",
