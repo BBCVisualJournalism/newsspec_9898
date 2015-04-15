@@ -108,12 +108,6 @@ define(['lib/news_special/bootstrap', 'lib/news_special/template_engine'], funct
         openCloseCards: function (card, element) {
             if (news.$(element).hasClass('guide-card__' + this.filterBy[this.elem])) {
                 card.toggleClass('guide-card--expanded');
-                if (card.hasClass('guide-card--expanded')) {
-                    news.pubsub.emit('istats', [this.filterBy[this.elem] + '-expand', 'expand-' + this.filterBy[this.elem], card.attr('id')]);
-                } else {
-                    news.pubsub.emit('istats', [this.filterBy[this.elem] + 'collapse', 'collapse-' + this.filterBy[this.elem], card.attr('id')]);
-                }
-                
             }
         },
 

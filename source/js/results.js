@@ -15,21 +15,32 @@ define([
         news.pubsub.on('results:show', $.proxy(this.showResults, this));
         news.pubsub.on('results:load-from:share', $.proxy(this.loadFromShare, this));
         news.pubsub.on('fetch:policy-cards:complete', $.proxy(this.displaysCards, this));
-        this.el.find('.make-own-button').on('click', this.reset);
+        this.el.find('.make-own-button').on('click', $.proxy(this.reset, this));
+        $('.page__no-cards .start-again').on('click', $.proxy(this.reset, this));
     };
 
     Results.prototype = {
 
         showResults: function (results, isShared) {
-            this.results = results;
-            this.el.removeClass('page__results__shared');
+            if (results.length > 0) {
+                this.results = results;
+                this.el.removeClass('page__results__shared');
 
-            news.pubsub.emit('fetch:policy-cards', [results]);
+                news.pubsub.emit('fetch:policy-cards', [results]);
 
-            this.drawChart();
-            this.addShareTools();
+                this.drawChart();
+                this.addShareTools();
 
-            this.toggleShareView(isShared === true);
+                this.toggleShareView(isShared === true);
+
+                if (isShared) {
+                    news.pubsub.emit('istats', ['nav-section', 'newsspec-interaction', 'loaded-shared-policy']);
+                } else {
+                    news.pubsub.emit('istats', ['nav-section', 'newsspec-interaction', 'results-shown']);
+                }
+            } else {
+                $('.breadcrumbs--to-hide').hide();
+            }
         },
 
         loadFromShare: function (cards) {
@@ -136,9 +147,8 @@ define([
             new ShareTools('#manifesto-share-holder', {
                 storyPageUrl: this.generateShareUrl(),
                 header: 'Share your manifesto',
-                message: 'Message',
-                desc: 'Some text here',
-                hashtag: 'GE2015',
+                message: 'If I were prime minister, here’s what I would do. See my manifesto and then create yours.',
+                hashtag: 'Election2015',
                 image: 'http://ichef.bbci.co.uk/news/640/media/images/81957000/png/_81957420_policies-promo.png',
                 template: 'dropdown'
             }, 'manifesto-share');
@@ -149,6 +159,13 @@ define([
             news.pubsub.emit('ns:sharetools:destroyAll');
             $('#manifesto-share-holder').empty();
             $('.breadcrumbs--to-hide').show();
+            $('.page__no-cards').hide();
+            if (this.results.length > 0) {
+                news.pubsub.emit('istats', ['nav-section', 'newsspec-interaction', 'made-own-from-shared']);
+            } else {
+                news.pubsub.emit('istats', ['nav-section', 'newsspec-interaction', 'started-again']);
+            }
+            
         }
 
     };

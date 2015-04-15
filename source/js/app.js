@@ -4,8 +4,7 @@ define([
     'nation-filter',
     'collection-view',
     'card-model',
-    'lib/news_special/share_tools/controller',
-    'lib/vendors/jquery/ajax.ie8'
+    'lib/news_special/share_tools/controller'
 ], function (news, ViewManager, NationFilter, CollectionView, CardModel, ShareTools) {
 
     var filterBy = {

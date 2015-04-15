@@ -50,8 +50,8 @@
 		color: #3E3E3E;
 
 		.breadcrumb--icon{
-			opacity: initial;
-			filter: initial;
+			opacity: 1;
+			filter: alpha(opacity=100);
 		}
 	}
 
@@ -60,8 +60,8 @@
 		color: #87c2c2;
 
 		.breadcrumb--icon{
-			opacity: initial;
-			filter: initial;
+			opacity: 1;
+			filter: alpha(opacity=100);
 		}
 
 		.breadcrumb--icon__issues{

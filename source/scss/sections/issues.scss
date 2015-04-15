@@ -6,15 +6,16 @@
 		pointer-events: none;
 
 		&.nav-button__active{
-			opacity: initial;
-			pointer: initial;
-			pointer-events: initial;
+			opacity: 1;
+			pointer: default;
+			pointer-events: auto;
 		}
 	}
 	
 	.issues{
 		margin: 16px 0 0 0;
 		list-style: none;
+		list-style-type: none;
 		background-color: #eeeeee;
 		padding: 16px;
 		overflow: hidden;

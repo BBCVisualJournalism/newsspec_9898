@@ -4,6 +4,7 @@
 	.bar-chart{
 		max-width: 550px;
 		list-style: none;
+		list-style-type: none;
 		padding: 0;
 		margin: 0;
 
@@ -62,7 +63,7 @@
 	}
 
 	.guide-card__issue:hover {
-		color: initial;
+		color: #404040;
 	}
 
 	.guide-card--policy {
@@ -70,7 +71,7 @@
 	}
 
 	.policies__card-container {
-	    min-height: initial;
+	    min-height: auto;
 	    overflow: hidden;
 	}
 
@@ -104,7 +105,7 @@
 	}
 
 	.issues-desc{
-		max-width: initial;
+		max-width: auto;
 		margin-bottom: 8px;
 	}
 	.issues-link{
@@ -154,7 +155,7 @@
 @include respondMinMax(580px, false){
 	.make-own-manifesto{
 		padding: 0 0 0 10px;
-		width: initial;
+		width: auto;
 
 		.nav-button{
 			margin: 0 0 0 10px;

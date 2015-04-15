@@ -81,11 +81,14 @@ define([
 
         startAgain: function () {
             news.pubsub.emit('reset');
+            news.pubsub.emit('istats', ['nav-section', 'newsspec-interaction', 'started-again']);
         },
 
         processPolicy: function (policyId) {
             this.selectedPolicies.push(policyId);
             this.showNextPolicy();
+
+            news.pubsub.emit('istats', ['policy-complete', 'newsspec-interaction', this.selectedPolicies.length + ' of ' + this.userPolicies.length]);
         },
 
         skipPolicy: function () {
