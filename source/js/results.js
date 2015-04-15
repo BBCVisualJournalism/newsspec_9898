@@ -15,7 +15,7 @@ define([
         news.pubsub.on('results:show', $.proxy(this.showResults, this));
         news.pubsub.on('results:load-from:share', $.proxy(this.loadFromShare, this));
         news.pubsub.on('fetch:policy-cards:complete', $.proxy(this.displaysCards, this));
-        this.el.find('.make-own-button').on('click', $.proxy(this.reset, this));
+        this.el.find('.make-own-button,.start-again').on('click', $.proxy(this.reset, this));
         $('.page__no-cards .start-again').on('click', $.proxy(this.reset, this));
     };
 
