@@ -147,8 +147,8 @@ define([
             new ShareTools('#manifesto-share-holder', {
                 storyPageUrl: this.generateShareUrl(),
                 header: 'Share your manifesto',
-                message: 'If I were prime minister, here’s what I would do. See my manifesto and then create yours.',
-                hashtag: 'Election2015',
+                message: 'If I were prime minister, here’s what I would do. See my manifesto and then create yours. #MyManifesto #GE2015',
+                hashtag: '',
                 image: 'http://ichef.bbci.co.uk/news/640/media/images/81957000/png/_81957420_policies-promo.png',
                 template: 'dropdown'
             }, 'manifesto-share');

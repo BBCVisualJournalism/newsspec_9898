@@ -402,14 +402,27 @@ define(['lib/news_special/bootstrap'], function (news) {
 
         if (NSShareModel.shortnerCache[cacheName]) {
             NSShareModel.storyPageUrl =  NSShareModel.shortnerCache[cacheName];
-            callback();
+            if (callback) {
+                callback();
+            }
+            
         } else {
             $.get('http://www.bbc.co.uk/modules/share/service/shrink?url=' +  encodedURL, function(data) {
                 NSShareModel.storyPageUrl = data.url;
                 NSShareModel.shortnerCache[cacheName] = data.url;
-                callback();
+                if (callback) {
+                    callback();
+                }
             });
         }
+    }
+
+    NSShareModel.prototype.hasShortUrlInCache = function () {
+        var NSShareModel = this,
+            encodedURL = encodeURIComponent(NSShareModel.baseUrl),
+            cacheName = encodedURL.replace(/[^A-Za-z]/g, '');
+
+        return (NSShareModel.shortnerCache[cacheName]) ? true : false;
     }
 
     return NSShareModel;

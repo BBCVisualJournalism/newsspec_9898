@@ -13,6 +13,10 @@ define(['lib/news_special/bootstrap', 'lib/news_special/share_tools/model', 'lib
             news.$.proxy(this._initialiseModule, this));
         // this builds the share HTML fragment
         news.pubsub.emit('ns:' + this.namespace + ':request:personalshare', [this.model]);
+
+        if (/iPhone OS 7/.test(navigator.userAgent)) {
+            this.model.getShortUrl();
+        }
     }
 
     NSShareController.prototype = {
@@ -20,20 +24,28 @@ define(['lib/news_special/bootstrap', 'lib/news_special/share_tools/model', 'lib
             return this.namespace;
         },
         _callFaceBook: function () {
-            var newWindow = window.open('', '_blank', 'width=500,height=300,menubar=no,top=0,left=0');
-            newWindow.document.write('Loading...');
-            this.model.getShortUrl(news.$.proxy(function () {
-                newWindow.location.href = this.model.fbShareTarget();
-                news.pubsub.emit('ns:' + this.namespace + ':overlay:close', [{'target': null}]);
-            }, this));
+            if(this.model.hasShortUrlInCache()) {
+                window.open(this.model.fbShareTarget(), '_blank', 'width=500,height=300,menubar=no,top=0,left=0');
+            } else {
+                var newWindow = window.open('', '_blank', 'width=500,height=300,menubar=no,top=0,left=0');
+                newWindow.document.write('Loading...');
+                this.model.getShortUrl(news.$.proxy(function () {
+                    newWindow.location.href = this.model.fbShareTarget();
+                    news.pubsub.emit('ns:' + this.namespace + ':overlay:close', [{'target': null}]);
+                }, this));
+            }
         },
         _callTwitter: function () {
-            var newWindow = window.open('', '_blank', 'width=500,height=300,menubar=no,top=0,left=0');
-            newWindow.document.write('Loading...');
-            this.model.getShortUrl(news.$.proxy(function () {
-                newWindow.location.href = this.model.twitterShareTarget();
-                news.pubsub.emit('ns:' + this.namespace + ':overlay:close', [{'target': null}]);
-            }, this));
+            if(this.model.hasShortUrlInCache()) {
+                window.open(this.model.twitterShareTarget(), '_blank', 'width=500,height=300,menubar=no,top=0,left=0');
+            } else {    
+                var newWindow = window.open('', '_blank', 'width=500,height=300,menubar=no,top=0,left=0');
+                newWindow.document.write('Loading...');
+                this.model.getShortUrl(news.$.proxy(function () {
+                    newWindow.location.href = this.model.twitterShareTarget();
+                    news.pubsub.emit('ns:' + this.namespace + ':overlay:close', [{'target': null}]);
+                }, this));
+            }
         },
         _callEmail: function () {
             news.pubsub.emit('ns:' + this.namespace + ':request:launchshare:samewindow', [this.model.emailShareTarget()]);
