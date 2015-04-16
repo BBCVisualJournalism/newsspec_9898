@@ -22,6 +22,7 @@ define([
     Results.prototype = {
 
         showResults: function (results, isShared) {
+            news.pubsub.emit('window:scrollTo', [0, 0]);
             if (results.length > 0) {
                 this.results = results;
                 this.el.removeClass('page__results__shared');
@@ -155,6 +156,7 @@ define([
         },
 
         reset: function () {
+            news.pubsub.emit('window:scrollTo', [0, 0]);
             news.pubsub.emit('reset');
             news.pubsub.emit('ns:sharetools:destroyAll');
             $('#manifesto-share-holder').empty();

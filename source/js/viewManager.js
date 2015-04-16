@@ -77,6 +77,7 @@ define([
             this.policiesPage.hide();
             this.resultsPage.hide();
             this.issuesPage.show();
+            news.pubsub.emit('window:scrollTo', [0, 0]);
         }
 
     };
